@@ -1,0 +1,1 @@
+!function(o){"use strict";o.extend(o.fn.bootgrid.Constructor.defaults.css,{icon:"icon fa",iconColumns:"fa-th-list",iconDown:"fa-sort-desc",iconRefresh:"fa-refresh",iconSearch:"fa-search",iconUp:"fa-sort-asc"})}(jQuery,window);

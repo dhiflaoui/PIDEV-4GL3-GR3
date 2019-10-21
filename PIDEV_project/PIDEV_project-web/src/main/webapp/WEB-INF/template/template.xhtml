@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtmll/DTD/xhtmll-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<ui:insert name="title"></ui:insert>
+
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="description" content="Bootstrap Admin App" />
+	<meta name="keywords"
+		content="app, responsive, jquery, bootstrap, dashboard, admin" />
+	<link rel="icon" type="image/x-icon" href="favicon.ico" />
+	<!-- FONT AWESOME-->
+	<link rel="stylesheet"
+		href="${facesContext.externalContext.requestContextPath}/vendor/%40fortawesome/fontawesome-free/css/brands.css" />
+	<link rel="stylesheet"
+		href="${facesContext.externalContext.requestContextPath}/vendor/%40fortawesome/fontawesome-free/css/regular.css" />
+	<link rel="stylesheet"
+		href="${facesContext.externalContext.requestContextPath}/vendor/%40fortawesome/fontawesome-free/css/solid.css" />
+	<link rel="stylesheet"
+		href="${facesContext.externalContext.requestContextPath}/vendor/%40fortawesome/fontawesome-free/css/fontawesome.css" />
+	<!-- SIMPLE LINE ICONS-->
+	<link rel="stylesheet"
+		href="${facesContext.externalContext.requestContextPath}/vendor/simple-line-icons/css/simple-line-icons.css" />
+	<!-- ANIMATE.CSS-->
+	<link rel="stylesheet"
+		href="${facesContext.externalContext.requestContextPath}/vendor/animate.css/animate.css" />
+	<!-- WHIRL (spinners)-->
+	<link rel="stylesheet"
+		href="${facesContext.externalContext.requestContextPath}/vendor/whirl/dist/whirl.css" />
+	<!-- =============== PAGE VENDOR STYLES ===============-->
+	<!-- WEATHER ICONS-->
+	<link rel="stylesheet"
+		href="${facesContext.externalContext.requestContextPath}/vendor/weather-icons/css/weather-icons.css" />
+	<!-- =============== BOOTSTRAP STYLES ===============-->
+	<link rel="stylesheet"
+		href="${facesContext.externalContext.requestContextPath}/css/bootstrap.css"
+		id="bscss" />
+	<!-- =============== APP STYLES ===============-->
+	<link rel="stylesheet"
+		href="${facesContext.externalContext.requestContextPath}/css/app.css"
+		id="maincss" />
+</h:head>
+
+<h:body>
+	<div class="wrapper">
+
+		<ui:include src="/WEB-INF/include/header.xhtml"></ui:include>
+		<ui:include src="/WEB-INF/include/sidebar.xhtml"></ui:include>
+
+
+ <section class="section-container">
+		<div class="content-wrapper">
+ <div class="content-heading">
+               <div>Dashboard<small data-localize="dashboard.WELCOME"></small></div><!-- START Language list-->
+               <div class="ml-auto">
+                  <div class="btn-group"><button class="btn btn-secondary dropdown-toggle dropdown-toggle-nocaret" type="button" data-toggle="dropdown">English</button>
+                     <div class="dropdown-menu dropdown-menu-right-forced animated fadeInUpShort" role="menu"><a class="dropdown-item" href="#" data-set-lang="en">English</a><a class="dropdown-item" href="#" data-set-lang="es">Spanish</a></div>
+                  </div>
+               </div><!-- END Language list-->
+            </div><!-- START cards box-->
+			
+<ui:insert name="content"></ui:insert>
+
+
+
+
+		</div>
+
+</section>
+
+	</div>
+
+
+
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/modernizr/modernizr.custom.js"></script>
+	<!-- STORAGE API-->
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/js-storage/js.storage.js"></script>
+	<!-- SCREENFULL-->
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/screenfull/dist/screenfull.js"></script>
+	<!-- i18next-->
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/i18next/i18next.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/i18next-xhr-backend/i18nextXHRBackend.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/jquery/dist/jquery.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/popper.js/dist/umd/popper.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/bootstrap/dist/js/bootstrap.js"></script>
+	<!-- =============== PAGE VENDOR SCRIPTS ===============-->
+	<!-- SLIMSCROLL-->
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/jquery-slimscroll/jquery.slimscroll.js"></script>
+	<!-- SPARKLINE-->
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/jquery-sparkline/jquery.sparkline.js"></script>
+	<!-- FLOT CHART-->
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/flot/jquery.flot.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/jquery.flot.tooltip/js/jquery.flot.tooltip.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/flot/jquery.flot.resize.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/flot/jquery.flot.pie.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/flot/jquery.flot.time.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/flot/jquery.flot.categories.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/jquery.flot.spline/jquery.flot.spline.js"></script>
+	<!-- EASY PIE CHART-->
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/easy-pie-chart/dist/jquery.easypiechart.js"></script>
+	<!-- MOMENT JS-->
+	<script
+		src="${facesContext.externalContext.requestContextPath}/vendor/moment/min/moment-with-locales.js"></script>
+	<!-- =============== APP SCRIPTS ===============-->
+	<script
+		src="${facesContext.externalContext.requestContextPath}/js/app.js"></script>
+</h:body>
+</html>
