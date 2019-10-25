@@ -1,8 +1,23 @@
 package tn.esprit.Pidev_Entities;
 
 import java.io.Serializable;
-import java.util.*;
-import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 
 
@@ -217,6 +232,23 @@ public class User implements Serializable{
 		this.ownerOF = ownerOF;
 		this.workOn = workOn;
 	}
+	
+	public User( String cin, String nom, String prenom, String adresseMail, String motdp, String photo,
+			String cv, String ville, String tel, int solde_conge, Double salaire, Role role) {
+		super();
+		this.cin = cin;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresseMail = adresseMail;
+		this.motdp = motdp;
+		this.photo = photo;
+		this.cv = cv;
+		this.ville = ville;
+		this.tel = tel;
+		this.solde_conge = solde_conge;
+		this.salaire = salaire;
+		this.role = role;
+	}
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -230,7 +262,23 @@ public class User implements Serializable{
 				+ managerOf + ", employeOf=" + employeOf + ", ownerOF=" + ownerOF + ", workOn=" + workOn + "]";
 	}
 
-
-
+	public User( int userIdToBeUpdated,String cin, String nom, String prenom, String adresseMail, String motdp, String photo,
+			String cv, String ville, String tel, int solde_conge, Double salaire, Role role) {
+		super();
+		this.id = userIdToBeUpdated;
+		this.cin = cin;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresseMail = adresseMail;
+		this.motdp = motdp;
+		this.photo = photo;
+		this.cv = cv;
+		this.ville = ville;
+		this.tel = tel;
+		this.solde_conge = solde_conge;
+		this.salaire = salaire;
+		this.role = role;
+	}
+	
 
 }
