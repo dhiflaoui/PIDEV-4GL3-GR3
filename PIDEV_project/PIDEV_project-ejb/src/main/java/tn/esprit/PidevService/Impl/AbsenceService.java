@@ -1,5 +1,7 @@
 package tn.esprit.PidevService.Impl;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,10 +18,24 @@ public class AbsenceService implements AbsenceServiceRemote ,AbsenceServiceLocal
 	EntityManager em;
 	
 	@Override
-	public void addAbsence(Absence absence) 
+	public int addAbsence(Absence absence) 
 	{	
 		em.persist(absence);
+ 		return absence.getId();
+
 	}
+	public List<Absence> getAllAbs() {
+		List<Absence> emp = em.createQuery("Select e from Absence e", Absence.class).getResultList();
+		return emp; }
+	public void deleteAbsById(int absId) {
+		Absence e = em.find(Absence.class,absId);
+		em.remove(e);
+		}
+	public void updateAbs(Absence e) { 
+		em.merge(e); 
+		
+		}
+	
 	
 	
 

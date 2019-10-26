@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/tempRH/template.xhtml">
+
+	<ui:define name="title">
+		<title>Absence</title>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+Absence		
+		</h:form>
+
+
+
+
+
+		<div class="col-md-6">
+			<!-- START card-->
+			<div class="card card-default">
+				<div class="card-header">Abs</div>
+				<div class="card-body">
+					<h:form enctype="multipart/form-data">
+						<p:growl id="msgs" showDetail="true" />
+						<div class="form-group">
+
+
+							<label>Date debut</label>
+							<p:datePicker id="DateDebut" value="#{absenceBean.dateDebut}" />
+						</div>
+
+
+						<div class="form-group">
+							<label>Date fin</label>
+
+							<p:datePicker id="DateFin" value="#{absenceBean.dateFin}" />
+
+						</div>
+
+
+						<div class="form-group">
+							<label>File</label>
+							<h:inputFile class="form-control" type="file" />
+						</div>
+
+						<div class="form-group">
+							<label>Décision</label>
+							<h:inputText class="form-control" type="text"
+								value="#{absenceBean.decision}" />
+						</div>
+
+						<div class="form-group">
+							<label>Etat</label>
+							<h:selectOneMenu class="custom-select custom-select-sm"
+								value="#{absenceBean.etat}">
+								<f:selectItem itemLabel="Choisir Etat" />
+								<f:selectItems value="#{data.ABS_Etat}" />
+							</h:selectOneMenu>
+						</div>
+						<div class="form-group">
+							<label>Users</label>
+							<h:selectOneMenu class="custom-select custom-select-sm"
+								value="#{absenceBean.user}">
+
+							</h:selectOneMenu>
+						</div>
+
+
+
+						<h:commandButton class="btn btn-info" value="Postuler"
+							action="#{absenceBean.addAbs()}" />
+						<p>
+							<small class="text-muted">* Integer fermentum accumsan
+								metus, id sagittis ipsum molestie vitae</small>
+						</p>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+
+
+</ui:composition>

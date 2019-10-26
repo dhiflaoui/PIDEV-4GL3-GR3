@@ -32,9 +32,10 @@ public class UserBean implements Serializable {
 	private Integer userIdToBeUpdated;
 
 	@EJB EmployeService employeService; 
-	public void addEmploye() {
+	public String addEmploye() {
 		employeService.ajouterUser(new User( cin,  nom,  prenom,  adresseMail,  motdp,  photo,
 				 cv,  ville,  tel,  solde_conge,  salaire,  role)); 
+		return "succes-ajout-employe?faces-redirect=true";
 		}
 	private List<User> users;
 	public List<User> getUsers(){

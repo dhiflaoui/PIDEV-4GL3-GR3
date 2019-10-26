@@ -6,7 +6,8 @@ import tn.esprit.Pidev_Entities.Absence;
 
 @Remote
 public interface AbsenceServiceRemote {
-	public void addAbsence(Absence a);
-
+	public int addAbsence(Absence a);
+	public void updateAbs(Absence e) ;
+	public void deleteAbsById(int absId) ;
 
 }
