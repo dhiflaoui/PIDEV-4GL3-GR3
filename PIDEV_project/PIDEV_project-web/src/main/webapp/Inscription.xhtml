@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/tempRH/template.xhtml">
+
+	<ui:define name="title">
+		<title>Inscription</title>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+		Ajouter Un Compte
+		
+		</h:form>
+
+
+
+
+
+		<div class="col-md-6">
+			<!-- START card-->
+			<div class="card card-default">
+				<div class="card-header">Compte</div>
+				<div class="card-body">
+					<h:form enctype="multipart/form-data">
+											<div class="form-group">
+					
+						<label>Cin</label>
+											<h:message for="validationCin" style="color:green"/>
+						<h:inputText class="form-control" rows="3"
+							value="#{userBean.cin}" id="validationCin" required="true"
+							requiredMessage="le champs cin contient 8 chiffre"><f:validateLength maximum="8" minimum="8" /></h:inputText>
+					</div>
+
+
+					<div class="form-group">
+						<label>Nom</label>
+						<h:inputText class="form-control" type="text"
+							value="#{userBean.nom}" />
+					</div>
+
+					<div class="form-group">
+						<label>Prenom</label>
+						<h:inputText class="form-control" type="text"
+							value="#{userBean.prenom}" />
+					</div>
+					<div class="form-group">
+					
+						<label>Email</label>
+											<h:message for="validationMail" style="color:green"/>
+						<h:inputText class="form-control" type="text"
+							value="#{userBean.adresseMail}" id="validationMail" required="true"
+							requiredMessage="le champs email est obligatoire"><f:validateRegex pattern=".+\@.+\..+" /></h:inputText>
+					</div>
+					<div class="form-group">
+						<label>Password</label>
+						<h:inputText class="form-control" type="text"
+							value="#{userBean.motdp}" />
+					</div>
+					<div class="form-group">
+						<label>Photo</label>
+						<h:inputFile class="form-control" type="file" />
+					</div>
+
+					<div class="form-group">
+						<label>CV</label>
+						<h:inputFile class="form-control" type="file" />
+					</div>
+
+					<div class="form-group">
+						<label>Ville</label>
+						<h:inputText class="form-control" type="text"
+							value="#{userBean.ville}" />
+					</div>
+					<div class="form-group">
+						<label>Téléphone</label>
+						<h:inputText class="form-control" type="text"
+							value="#{userBean.tel}" />
+					</div>
+					<div class="form-group">
+						<label>Solde Congé</label>
+						<h:inputText class="form-control" type="text"
+							value="#{userBean.solde_conge}" />
+					</div>
+					<div class="form-group">
+						<label>Salaire</label>
+						<h:inputText class="form-control" type="text"
+							value="#{userBean.salaire}" />
+					</div>
+					<div class="form-group">
+						<label>Role</label>
+						<h:selectOneMenu class="custom-select custom-select-sm" value="#{userBean.role}">
+						<f:selectItem itemLabel="Choisir Role"  />
+								<f:selectItems value="#{data.roles}" />
+						</h:selectOneMenu>
+					</div>
+
+
+
+					<h:commandButton class="btn btn-info" value="Postuler"
+						action="#{userBean.addEmploye()}" />
+					<p>
+						<small class="text-muted">* Integer fermentum accumsan
+							metus, id sagittis ipsum molestie vitae</small>
+					</p>
+				</h:form>
+			</div>
+		</div>
+</div>
+	</ui:define>
+
+
+</ui:composition>

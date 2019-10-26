@@ -91,6 +91,15 @@ public class Absence implements Serializable{
 		this.etat = etat;
 		this.user = user;
 	}
+	public Absence( Date dateDebut, Date dateFin, String file, String decision, ABS_Etat etat, User user) {
+		super();
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.file = file;
+		this.decision = decision;
+		this.etat = etat;
+		this.user = user;
+	}
 	public Absence() {
 		super();
 		// TODO Auto-generated constructor stub

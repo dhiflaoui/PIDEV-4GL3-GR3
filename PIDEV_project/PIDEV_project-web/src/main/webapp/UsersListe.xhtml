@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+			xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/tempRH/template.xhtml">
+
+	<ui:define name="title">
+		<title>EQUIPE ADVYTEAM</title>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+		</h:form>
+
+
+
+
+		<div class="card card-default">
+			<h:form enctype="multipart/form-data">
+
+				<div class="card-header">EQUIPE ADVYTEAM</div>
+				<div class="card-body">
+					<!-- START table-responsive-->
+
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+
+									<th>Cin</th>
+									<th>Nom</th>
+									<th>Prenom</th>
+									<th>@Mail</th>
+
+									<th>Mot De Passe</th>
+									<th>ville</th>
+									<th>Téléphone</th>
+
+									<th>cv</th>
+									<th>Photo</th>
+									<th>Salaire</th>
+
+									<th>Solde Congé</th>
+									<th>Role</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<ui:repeat value="#{userBean.users}" var="item">
+									<tr>
+
+										<td>#{item.cin}</td>
+										<td>#{item.nom}</td>
+										<td>#{item.prenom}</td>
+
+										<td>#{item.motdp}</td>
+										<td>#{item.adresseMail}</td>
+										<td>#{item.ville}</td>
+
+										<td>#{item.tel}</td>
+										<td>#{item.cv}</td>
+										<td>#{item.photo}</td>
+
+										<td>#{item.salaire}</td>
+										<td>#{item.solde_conge}</td>
+										<td>#{item.role}</td>
+
+										<td><h:commandButton class="btn btn-info"
+												value="Modifier" action="#{userBean.modifier(item)}" /> <h:commandButton
+												class="btn btn-info" value="Supprimer"
+												action="#{userBean.removeEmploye(item.id)}" /></td>
+
+									</tr>
+								</ui:repeat>
+
+							</tbody>
+						</table>
+
+					</div>
+					<!-- END table-responsive-->
+				</div>
+			</h:form>
+
+		</div>
+
+		<div class="card b">
+
+			<div class="card-body">
+				<h:form enctype="multipart/form-data">
+					<div class="form-group">
+						<label>Cin</label>
+						<h:inputTextarea class="form-control" rows="3"
+							value="#{userBean.cin}" />
+					</div>
+
+
+					<div class="form-group">
+						<label>Nom</label>
+						<h:inputText class="form-control" type="text"
+							value="#{userBean.nom}" />
+					</div>
+
+					<div class="form-group">
+						<label>Prenom</label>
+						<h:inputText class="form-control" type="text"
+							value="#{userBean.prenom}" />
+					</div>
+					<div class="form-group">
+						<label>Email</label>
+						<h:inputText class="form-control" type="text"
+							value="#{userBean.adresseMail}" />
+					</div>
+					<div class="form-group">
+						<label>Password</label>
+						<h:inputText class="form-control" type="text"
+							value="#{userBean.motdp}" />
+					</div>
+					<div class="form-group">
+						<label>Photo</label>
+						<h:inputFile class="form-control" type="file" />
+					</div>
+
+					<div class="form-group">
+						<label>CV</label>
+						<h:inputFile class="form-control" type="file" />
+					</div>
+
+					<div class="form-group">
+						<label>Ville</label>
+						<h:inputText class="form-control" type="text"
+							value="#{userBean.ville}" />
+					</div>
+					<div class="form-group">
+						<label>Téléphone</label>
+						<h:inputText class="form-control" type="text"
+							value="#{userBean.tel}" />
+					</div>
+					<div class="form-group">
+						<label>Solde Congé</label>
+						<h:inputText class="form-control" type="text"
+							value="#{userBean.solde_conge}" />
+					</div>
+					<div class="form-group">
+						<label>Salaire</label>
+						<h:inputText class="form-control" type="text"
+							value="#{userBean.salaire}" />
+					</div>
+					<div class="form-group">
+						<label>Role</label>
+						<h:selectOneMenu class="form-control" value="#{userBean.role}">
+						<f:selectItem itemLabel="Choisir Role"  />
+								<f:selectItems value="#{data.roles}" />
+						</h:selectOneMenu>
+					</div>
+
+
+
+					<h:commandButton action="#{userBean.mettreAjourUser()}"
+						value="Mettre a jour User" />
+
+					<p>
+						<small class="text-muted">* Integer fermentum accumsan
+							metus, id sagittis ipsum molestie vitae</small>
+					</p>
+				</h:form>
+			</div>
+		</div>
+
+
+
+
+
+
+
+	</ui:define>
+
+
+</ui:composition>
