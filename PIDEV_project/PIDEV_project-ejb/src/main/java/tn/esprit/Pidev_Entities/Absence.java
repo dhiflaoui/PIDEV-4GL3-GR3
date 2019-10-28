@@ -37,7 +37,6 @@ public class Absence implements Serializable{
 	@Column(name="ABS_Etat")
 	private ABS_Etat etat;
 	@ManyToOne
-	@JoinColumn(name="idUser", referencedColumnName="UT_ID", insertable=false , updatable=false)
 	private User user;
 	public int getId() {
 		return id;
@@ -99,6 +98,14 @@ public class Absence implements Serializable{
 		this.decision = decision;
 		this.etat = etat;
 		this.user = user;
+	}
+	public Absence( Date dateDebut, Date dateFin, String file, String decision, ABS_Etat etat) {
+		super();
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.file = file;
+		this.decision = decision;
+		this.etat = etat;
 	}
 	public Absence() {
 		super();

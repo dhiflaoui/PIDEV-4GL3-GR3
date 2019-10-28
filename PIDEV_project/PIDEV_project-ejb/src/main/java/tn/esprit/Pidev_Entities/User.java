@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -48,16 +49,23 @@ public class User implements Serializable{
 	String tel;
 	@Column(name="UT_SOLDE_CONGE") 
 	int solde_conge;
+	@Column(name="UT_SOLDE_ABSENCE", nullable = true)
+	int solde_absence;
 	@Column(name="UT_SALAIRE") 
 	Double salaire;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name="Role")
 	private Role role ;
+	@Enumerated(EnumType.STRING)
+	@Column(name="Specialite")
+	private Specialite specialite;
+
 	// Relation entre employe et congé
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<Conge>  conge ;
 	// Relation entre employe et congé
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade = CascadeType.PERSIST)
 	private List<Absence>  absence ;
 	// Relation entre employe et evaluation
 	@ManyToMany(mappedBy="Users", cascade = CascadeType.ALL)
@@ -206,7 +214,7 @@ public class User implements Serializable{
 		this.workOn = workOn;
 	}
 	public User(int id, String cin, String nom, String prenom, String adresseMail, String motdp, String photo,
-			String cv, String ville, String tel, int solde_conge, Double salaire, Role role, List<Conge> conge,
+			String cv, String ville, String tel, int solde_conge,int solde_absence, Double salaire, Role role,Specialite specialite, List<Conge> conge,
 			List<Absence> absence, Set<Evaluation> evaluations, Mission mission, List<Equipe> managerOf,
 			List<Equipe> employeOf, List<Project> ownerOF, Project workOn) {
 		super();
@@ -221,8 +229,12 @@ public class User implements Serializable{
 		this.ville = ville;
 		this.tel = tel;
 		this.solde_conge = solde_conge;
+		this.solde_absence = solde_absence;
+
 		this.salaire = salaire;
 		this.role = role;
+		this.specialite = specialite;
+
 		this.conge = conge;
 		this.absence = absence;
 		Evaluations = evaluations;
@@ -234,7 +246,7 @@ public class User implements Serializable{
 	}
 	
 	public User( String cin, String nom, String prenom, String adresseMail, String motdp, String photo,
-			String cv, String ville, String tel, int solde_conge, Double salaire, Role role) {
+			String cv, String ville, String tel, int solde_conge, int solde_absence, Double salaire, Role role,Specialite specialite) {
 		super();
 		this.cin = cin;
 		this.nom = nom;
@@ -246,24 +258,41 @@ public class User implements Serializable{
 		this.ville = ville;
 		this.tel = tel;
 		this.solde_conge = solde_conge;
+		this.solde_absence = solde_absence;
+
 		this.salaire = salaire;
 		this.role = role;
+		this.specialite = specialite;
+
+	}
+	public User( int userIdToBeUpdated,String cin, String nom, String prenom, String adresseMail, String motdp, String ville, String tel, int solde_conge, int solde_absence, Double salaire, Role role,Specialite specialite) {
+		super();
+		this.id = userIdToBeUpdated;
+
+		this.cin = cin;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresseMail = adresseMail;
+		this.motdp = motdp;
+		
+		this.ville = ville;
+		this.tel = tel;
+		this.solde_conge = solde_conge;
+		this.solde_absence = solde_absence;
+
+		this.salaire = salaire;
+		this.role = role;
+		this.specialite = specialite;
+
 	}
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", cin=" + cin + ", nom=" + nom + ", prenom=" + prenom + ", adresseMail="
-				+ adresseMail + ", motdp=" + motdp + ", photo=" + photo + ", cv=" + cv + ", ville=" + ville + ", tel="
-				+ tel + ", solde_conge=" + solde_conge + ", salaire=" + salaire + ", role=" + role + ", conge=" + conge
-				+ ", absence=" + absence + ", Evaluations=" + Evaluations + ", mission=" + mission + ", managerOf="
-				+ managerOf + ", employeOf=" + employeOf + ", ownerOF=" + ownerOF + ", workOn=" + workOn + "]";
-	}
+	
 
 	public User( int userIdToBeUpdated,String cin, String nom, String prenom, String adresseMail, String motdp, String photo,
-			String cv, String ville, String tel, int solde_conge, Double salaire, Role role) {
+			String cv, String ville, String tel, int solde_conge,int solde_absence, Double salaire, Role role, Specialite specialite) {
 		super();
 		this.id = userIdToBeUpdated;
 		this.cin = cin;
@@ -276,8 +305,29 @@ public class User implements Serializable{
 		this.ville = ville;
 		this.tel = tel;
 		this.solde_conge = solde_conge;
+		this.solde_absence = solde_absence;
+
 		this.salaire = salaire;
 		this.role = role;
+		this.specialite = specialite;
+	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", cin=" + cin + ", nom=" + nom + ", prenom=" + prenom + ", adresseMail="
+				+ adresseMail + ", motdp=" + motdp + ", photo=" + photo + ", cv=" + cv + ", ville=" + ville + ", tel="
+				+ tel + ", solde_conge=" + solde_conge +  ", solde_absence=" + solde_absence +", salaire=" + salaire + "]";
+	}
+	public int getSolde_absence() {
+		return solde_absence;
+	}
+	public void setSolde_absence(int solde_absence) {
+		this.solde_absence = solde_absence;
+	}
+	public Specialite getSpecialite() {
+		return specialite;
+	}
+	public void setSpecialite(Specialite specialite) {
+		this.specialite = specialite;
 	}
 	
 

@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
 import tn.esprit.PidevService.Interf.EmployeServiceLocal;
 import tn.esprit.PidevService.Interf.EmployeServiceRemote;
 import tn.esprit.Pidev_Entities.User;
@@ -50,5 +51,10 @@ public class EmployeService implements EmployeServiceRemote ,EmployeServiceLocal
 		em.merge(e); 
 		
 		}
+	public User getUserById(int userId) 
+	{
+		User emp = em.find(User.class, userId);
+        return emp;
+	}
 	
 }
