@@ -5,7 +5,9 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/tempRH/template.xhtml">
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
 	<ui:define name="title">
 		<title>Absence</title>
 	</ui:define>
@@ -25,7 +27,6 @@ Absence
 				<div class="card-header">Abs</div>
 				<div class="card-body">
 					<h:form enctype="multipart/form-data">
-						<p:growl id="msgs" showDetail="true" />
 						<div class="form-group">
 
 
@@ -63,10 +64,12 @@ Absence
 						</div>
 						<div class="form-group">
 							<label>Users</label>
-							<h:selectOneMenu class="custom-select custom-select-sm"
-								value="#{absenceBean.user}">
-
-							</h:selectOneMenu>
+						
+<h:selectOneMenu class="custom-select custom-select-sm" value="#{absenceBean.selectUserById}" >
+		<f:selectItems value="#{absenceBean.users}" 
+			var="user" itemValue="#{user.id}" 
+			itemLabel="#{user.nom}" />
+	</h:selectOneMenu>
 						</div>
 
 

@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 
 import tn.esprit.Pidev_Entities.ABS_Etat;
 import tn.esprit.Pidev_Entities.Role;
+import tn.esprit.Pidev_Entities.Specialite;
 
 
 @ManagedBean(name = "data") 
@@ -20,6 +21,10 @@ public Role[] getRoles()
 public ABS_Etat[] getABS_Etat()
 {
 	return ABS_Etat.values();
+			}
+public Specialite[] getSpecialites()
+{
+	return Specialite.values();
 			}
 
 }

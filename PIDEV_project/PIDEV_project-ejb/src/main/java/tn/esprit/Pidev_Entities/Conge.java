@@ -39,7 +39,6 @@ public class Conge implements Serializable{
 	@Column(name="Conge_Etat")
 	private Conge_Etat etat; 
 	@ManyToOne
-	@JoinColumn(name="idUser", referencedColumnName="UT_ID", insertable=false , updatable=false)
 	private User user;
 	public int getId() {
 		return id;

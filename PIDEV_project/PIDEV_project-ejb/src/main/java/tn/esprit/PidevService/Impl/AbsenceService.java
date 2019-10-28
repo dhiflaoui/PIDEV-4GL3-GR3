@@ -24,8 +24,9 @@ public class AbsenceService implements AbsenceServiceRemote ,AbsenceServiceLocal
  		return absence.getId();
 
 	}
+	
 	public List<Absence> getAllAbs() {
-		List<Absence> emp = em.createQuery("Select e from Absence e", Absence.class).getResultList();
+		List<Absence> emp = em.createQuery("Select a from Absence a", Absence.class).getResultList();
 		return emp; }
 	public void deleteAbsById(int absId) {
 		Absence e = em.find(Absence.class,absId);
