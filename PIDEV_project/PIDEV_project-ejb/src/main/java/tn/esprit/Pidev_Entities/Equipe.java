@@ -14,6 +14,8 @@ import javax.persistence.Table;
 @Entity 
 @Table(name="T_EQUIPE") 
 public class Equipe implements Serializable {
+	
+	
 	@Id 
 	@GeneratedValue( strategy= GenerationType.IDENTITY) 
 	@Column(name="EQ_ID") 
