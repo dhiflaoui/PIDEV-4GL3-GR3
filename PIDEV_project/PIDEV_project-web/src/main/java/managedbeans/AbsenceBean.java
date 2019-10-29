@@ -1,5 +1,9 @@
 package managedbeans;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +11,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.servlet.http.Part;
 
 import mailer.SendMail;
 import models.Mail;
@@ -15,6 +20,7 @@ import tn.esprit.PidevService.Impl.EmployeService;
 import tn.esprit.Pidev_Entities.ABS_Etat;
 import tn.esprit.Pidev_Entities.Absence;
 import tn.esprit.Pidev_Entities.User;
+import utils.Util;
 
 @ManagedBean(name = "absenceBean") 
 @SessionScoped
@@ -22,19 +28,42 @@ public class AbsenceBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Date dateDebut ;
 	private Date dateFin ;
-    private String file;
+    private Part file;
     private String decision; 
 	private ABS_Etat etat;
-
 	private int selectUserById;
-	@EJB AbsenceService absenceService;
+	@EJB
+	AbsenceService absenceService;
+	@EJB
+	EmployeService employeService;
+
 	private List<Absence> absences;
 	public List<Absence> getAbsences(){
 		absences = absenceService.getAllAbs(); 
 		return absences;
 	}
+	public void justifiéClient(Absence item) throws IOException {
+		System.out.println("nn354546546546454654654654nnnnnnnnnnnnnoooooooooooooooooooooooo");
+		item.setEtat(ABS_Etat.en_cour_de_traitement);
+		item.setFile(file.getSubmittedFileName());
+		absenceService.updateAbs(item);
+		String folderName1 = Util.serverF;
+		upload2(folderName1);
+		
+	}
+	public void setMesabsences(List<Absence> mesabsences) {
+		this.mesabsences = mesabsences;
+	}
+	private List<Absence> mesabsences;
+	public List<Absence> getMesabsences(){
+		int a = LoginBean.getUser().getId();
+		System.out.println("leeeeeeeeeeeeeeeeeeeeeeee"+a);
+		mesabsences = absenceService.mesAbsence(a); 
+		return mesabsences;
+	}
 	
-	@EJB EmployeService employeService;
+
+
 	
 	private List<User> users;
 	public List<User> getUsers(){
@@ -49,7 +78,7 @@ public class AbsenceBean implements Serializable {
 	}
 	public String addAbs() {
 		User userSelected = employeService.getUserById(selectUserById);
-		Absence abs = new Absence(dateDebut, dateFin, file, decision, etat);
+		Absence abs = new Absence(dateDebut, dateFin, decision, etat);
 		abs.setUser(userSelected);
 		absenceService.addAbsence(abs);
 		System.out.println("leeeeeeeeeeeeeeeee"+selectUserById+"leeeeeeeeeeeeeeeee"+userSelected.getNom());
@@ -77,31 +106,40 @@ public void justifieAbs(Absence item) {
     if (value ==1 && ( soldeConge - value) >=0) {
 		user.setSolde_conge(soldeConge -value);	
 		employeService.updateUser(user);
+		item.setDecision("Votre Solde Congé est diminué par "+value+"jour(s)");
+		absenceService.updateAbs(item);
+
 		
     }
     else if (value ==1 && ( soldeConge - value) <=0) {
     	Double salaire = user.getSalaire();
     	user.setSalaire(salaire - ((salaire * 0.3*value)/100));
     	employeService.updateUser(user);
+    	item.setDecision("Votre Salaire est diminué par "+((salaire * 0.3*value)/100)+"jour(s)");
+		absenceService.updateAbs(item);
     }
     else if (value >1 && ( soldeAbsence - value) >=0) {
     	user.setSolde_absence(soldeAbsence-value);
 		employeService.updateUser(user);
-
+		item.setDecision("Votre Solde Absence est diminué par "+value+"jour(s)");
+		absenceService.updateAbs(item);
     	
     }
     else if (value >1 && ( soldeAbsence - value) <=0) {
     	Double salaire = user.getSalaire();
     	user.setSalaire(salaire - ((salaire * 0.3*value)/100));
     	employeService.updateUser(user);		
-
+    	item.setDecision("Votre Salaire est diminué par "+((salaire * 0.3*value)/100)+"jour(s)");
+		absenceService.updateAbs(item);
     	
     }
     
 
 	item.setEtat(etat.justifié);
 		
-		absenceService.updateAbs(item);}
+		absenceService.updateAbs(item);
+		}
+
 public void nonJustifieAbs(Absence item) {
 	Date dateD = item.getDateDebut();
 	Date dateF = item.getDateFin();
@@ -116,7 +154,21 @@ public void nonJustifieAbs(Absence item) {
 	Double salaire = user.getSalaire();
 	user.setSalaire(salaire - ((salaire * 0.3*value)/100));
 	employeService.updateUser(user);
+	item.setDecision("Votre Salaire est diminué par "+((salaire * 0.3*value)/100)+"jour(s)");
 		absenceService.updateAbs(item);}
+public void upload2(String folderName1) throws IOException {
+	InputStream in = file.getInputStream();
+	File f = new File(folderName1 + "\\" + file.getSubmittedFileName());
+	f.createNewFile();
+	FileOutputStream out = new FileOutputStream(f);
+	byte[] buffer = new byte[1024];
+	int length;
+	while ((length = in.read(buffer)) > 0) {
+		out.write(buffer, 0, length);
+	}
+	out.close();
+	in.close();
+}
 	
 public void removeAbs(int absId) {
 		
@@ -140,10 +192,10 @@ public void removeAbs(int absId) {
 	public void setDateFin(Date dateFin) {
 		this.dateFin = dateFin;
 	}
-	public String getFile() {
+	public Part getFile() {
 		return file;
 	}
-	public void setFile(String file) {
+	public void setFile(Part file) {
 		this.file = file;
 	}
 	public String getDecision() {
@@ -178,6 +230,8 @@ public void removeAbs(int absId) {
 		this.selectUserById = selectUserById;
 	}
 
+
+	
 	
 
 

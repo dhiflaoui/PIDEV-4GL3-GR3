@@ -17,9 +17,11 @@ import tn.esprit.Pidev_Entities.User;
 @ManagedBean(name="loginBean") 
 @SessionScoped
 public class LoginBean implements Serializable {
+
 	private String cin; 
 	private String motdp; 
-	private User user; 
+	private static User user; 
+	private User userLoggedIn;
 	private Boolean loggedIn;
 
 	@EJB
@@ -28,17 +30,34 @@ public class LoginBean implements Serializable {
 	public String doLogin()
 	{
 		String navigateTo = "null"; 
-		user = employeService.getUserByEmailAndPassword(cin, motdp); 
-
-		if (user != null && user.getRole() == Role.RH) {
+		 userLoggedIn = employeService.getUserByEmailAndPassword(cin, motdp); 
+		if (userLoggedIn != null && userLoggedIn.getRole() == Role.RH) {
+user = userLoggedIn;
 			navigateTo = "/UsersListe?faces-redirect=true";
+			System.out.println("leeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+user.getNom());
 			loggedIn = true; 
+		}
+		else if (userLoggedIn != null && userLoggedIn.getRole() == Role.INGENIEUR) {
+user = userLoggedIn;
+			navigateTo = "/Mes_Absence?faces-redirect=true";
+			System.out.println("leeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+user.getNom());
+
+			loggedIn = true; 
+			
 		}
 		else 
 		{
 			FacesContext.getCurrentInstance().addMessage("form:btn", new FacesMessage("Bad Credentials"));
 		}
 		return navigateTo; 
+	}
+
+	public User getUserLoggedIn() {
+		return userLoggedIn;
+	}
+
+	public void setUserLoggedIn(User userLoggedIn) {
+		this.userLoggedIn = userLoggedIn;
 	}
 
 	public String doLogout()
@@ -65,7 +84,7 @@ public class LoginBean implements Serializable {
 		this.motdp = motdp;
 	}
 
-	public User getUser() {
+	public static User getUser() {
 		return user;
 	}
 

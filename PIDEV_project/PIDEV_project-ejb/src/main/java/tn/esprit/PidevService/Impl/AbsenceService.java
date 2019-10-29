@@ -6,10 +6,12 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import tn.esprit.PidevService.Interf.AbsenceServiceLocal;
 import tn.esprit.PidevService.Interf.AbsenceServiceRemote;
 import tn.esprit.Pidev_Entities.Absence;
+import tn.esprit.Pidev_Entities.User;
 
 @Stateless
 @LocalBean
@@ -37,6 +39,13 @@ public class AbsenceService implements AbsenceServiceRemote ,AbsenceServiceLocal
 		
 		}
 	
+	public List<Absence> mesAbsence(int idEmployee) {
+		TypedQuery<Absence> query = em.createQuery("SELECT m FROM Absence m WHERE m.user =:x", Absence.class);
+		query.setParameter("x", em.find(User.class, idEmployee));
+
+		List<Absence> results = query.getResultList();
+		return results;
+	}
 	
 	
 
