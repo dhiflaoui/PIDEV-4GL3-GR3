@@ -40,7 +40,7 @@ public class Task implements Serializable {
 	@JoinColumn(name="idProject", referencedColumnName="Project_ID", insertable=false , updatable=false, nullable = true)
 	private Project project;
 	
-	@OneToOne
+	@OneToOne(mappedBy="task", cascade = CascadeType.ALL)
 	private Assignment assignment;
 	
 	

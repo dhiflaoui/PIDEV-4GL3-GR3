@@ -22,10 +22,8 @@ public class EquipeService implements EquipeServiceRemote ,EquipeServiceLocal {
 	
 	@Override
 	public int public int AddEquipe(Equipe equipe , User user)
-	{	
-		equipe.qetManagedBy()=user;
+	{		
 		user.getManagerOf().add(equipe);
-		em.persist(equipe);
 		em.merge(user);
  		return equipe.getId();
 	}

@@ -22,9 +22,8 @@ public class Assignment implements Serializable {
 	@Column(name="ASSIGNMENT_ID") 
 	int id;
 	
-	private String clientName;
-	
-	private int Budget;
+	private String title;
+	private String description;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date startedAt
@@ -34,9 +33,9 @@ public class Assignment implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="idEmployee", referencedColumnName="UT_ID", insertable=false , updatable=false)
-	private Equipe  emp;
+	private User  emp;
 	
-	@OneToOne(mappedBy="assignment")
+	@OneToOne
 	private Task task;
 	
 	

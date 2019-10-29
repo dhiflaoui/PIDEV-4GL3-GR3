@@ -33,7 +33,7 @@ public class Project implements Serializable {
 	@JoinColumn(name="idManager", referencedColumnName="UT_ID", insertable=false , updatable=false, nullable = true)
 	private User ownedBy;
 	
-	@OneToMany(mappedBy="project")
+	@OneToMany(mappedBy="project" , cascade = CascadeType.ALL)
 	private List<Tasks>  tasks;
 	
 }

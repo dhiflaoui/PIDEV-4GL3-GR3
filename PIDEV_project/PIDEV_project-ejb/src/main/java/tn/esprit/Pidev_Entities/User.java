@@ -79,7 +79,7 @@ public class User implements Serializable{
 	//Yassine ********************************************
 	
 	// Relation entre manager et equipe
-	@OneToMany(mappedBy="managedBy")
+	@OneToMany(mappedBy="managedBy", fetch=FetchType.EAGER , cascade = CascadeType.PERSIST)
 	private List<Equipe>  managerOf ;
 	
 	// Relation entre employe et equipe
@@ -92,7 +92,7 @@ public class User implements Serializable{
 	private List<Project>  ownerOF ;
 	
 	// Relation entre employee et assignements
-	@OneToMany(mappedBy="emp")
+	@OneToMany(mappedBy="emp", cascade = CascadeType.ALL)
 	private List<Assignment>  assignments ;
 	
 	
