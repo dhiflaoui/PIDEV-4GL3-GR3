@@ -91,7 +91,7 @@ public class UserBean implements Serializable {
 		this.setAdresseMail(user.getAdresseMail()); 
 		this.setVille(user.getVille()); 
 		this.setRole(user.getRole()); 
-		//this.setCv(user.getCv()); 
+	//	this.setCv(user.getCv()); 
 		//this.setPhoto(user.getPhoto()); 
 		this.setTel(user.getTel()); 
 		this.setSolde_conge(user.getSolde_conge()); 
