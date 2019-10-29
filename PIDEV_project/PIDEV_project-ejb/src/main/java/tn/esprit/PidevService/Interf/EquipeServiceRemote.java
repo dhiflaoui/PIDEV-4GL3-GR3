@@ -3,7 +3,7 @@ package tn.esprit.PidevService.Interf;
 
 import javax.ejb.Remote;
 
-import tn.esprit.Pidev_Entities.User;
+import tn.esprit.Pidev_Entities.*;
 
 @Remote
 public interface EquipeServiceRemote {

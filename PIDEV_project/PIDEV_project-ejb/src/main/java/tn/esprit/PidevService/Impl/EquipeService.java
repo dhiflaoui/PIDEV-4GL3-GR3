@@ -8,9 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import tn.esprit.PidevService.Interf.EmployeServiceLocal;
-import tn.esprit.PidevService.Interf.EmployeServiceRemote;
-import tn.esprit.Pidev_Entities.User;
+import tn.esprit.PidevService.Interf.*;
+import tn.esprit.Pidev_Entities.*;
 
 
 @Stateless
@@ -22,9 +21,12 @@ public class EquipeService implements EquipeServiceRemote ,EquipeServiceLocal {
 	
 	
 	@Override
-	public int public int AddEquipe(Equipe equipe)
+	public int public int AddEquipe(Equipe equipe , User user)
 	{	
+		equipe.qetManagedBy()=user;
+		user.getManagerOf().add(equipe);
 		em.persist(equipe);
+		em.merge(user);
  		return equipe.getId();
 	}
 	

@@ -28,16 +28,14 @@ public class AbsenceService implements AbsenceServiceRemote ,AbsenceServiceLocal
 	public List<Absence> getAllAbs() {
 		List<Absence> emp = em.createQuery("Select a from Absence a", Absence.class).getResultList();
 		return emp; }
+	
 	public void deleteAbsById(int absId) {
 		Absence e = em.find(Absence.class,absId);
 		em.remove(e);
 		}
+	
 	public void updateAbs(Absence e) { 
 		em.merge(e); 
 		
 		}
-	
-	
-	
-
 }
