@@ -1,5 +1,6 @@
 package tn.esprit.PidevService.Impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -10,6 +11,7 @@ import javax.persistence.TypedQuery;
 
 import tn.esprit.PidevService.Interf.*;
 import tn.esprit.Pidev_Entities.*;
+import tn.esprit.examen_s2_2017.persistence.ReponseSondage;
 
 
 @Stateless
@@ -22,10 +24,17 @@ public class EquipeService implements EquipeServiceRemote ,EquipeServiceLocal {
 	
 	@Override
 	public int public int AddEquipe(Equipe equipe , User user)
-	{		
-		user.getManagerOf().add(equipe);
+	{	
+		if(user.getManagerOf() == null){
+			List<Equipe> equipes = new ArrayList<>();
+			equipes.add(equipe);
+			user.setManagerOf(equipes);
+		}else{
+			user.getManagerOf().add(equipe);		
+			}
 		em.merge(user);
- 		return equipe.getId();
+		return equipe.getId();
+
 	}
 	
 	public Equipe getEquipeById(int id) {
@@ -49,11 +58,10 @@ public class EquipeService implements EquipeServiceRemote ,EquipeServiceLocal {
 	
 	public void UpdateEquipe(Equipe equipe) {
 		em.merge(equipe); 
-	
 		}
 	
 	public void AssignUserTo(Equipe equipe , User user) {
-		if (user.getMemberOf() == Null || user.getMemberOf()==equipe){
+		if (user.getMemberOf()== null || user.getMemberOf() == equipe){
 			 System.out.println("Erreur");
 		}
 		else

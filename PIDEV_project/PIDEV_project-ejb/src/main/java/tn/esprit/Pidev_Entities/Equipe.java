@@ -33,7 +33,7 @@ public class Equipe implements Serializable {
 	
 	private String title ;
 	private String description;
-	private String score ;
+	private int score ;
 	
 
 }
