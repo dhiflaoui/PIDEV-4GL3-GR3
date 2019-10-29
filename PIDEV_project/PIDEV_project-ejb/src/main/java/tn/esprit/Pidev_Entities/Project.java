@@ -16,15 +16,24 @@ import javax.persistence.Table;
 @Entity 
 @Table(name="T_PROJECT")
 public class Project implements Serializable {
+	
 	@Id 
 	@GeneratedValue( strategy= GenerationType.IDENTITY) 
 	@Column(name="Project_ID") 
 	int id;
+	
+	private String clientName;
+	
+	private int Budget;
+	
+	@Enumerated(EnumType.String)
+	private State state ;
+	
 	@ManyToOne
 	@JoinColumn(name="idManager", referencedColumnName="UT_ID", insertable=false , updatable=false, nullable = true)
 	private User ownedBy;
-	@OneToMany(mappedBy="workOn")
-	private List<User>  employes ;
 	
-
+	@OneToMany(mappedBy="project")
+	private List<Tasks>  tasks;
+	
 }

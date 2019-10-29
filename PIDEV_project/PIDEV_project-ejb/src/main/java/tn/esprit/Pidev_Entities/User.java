@@ -74,19 +74,29 @@ public class User implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="idMission", referencedColumnName="id", insertable=false , updatable=false)
 	private Mission mission;
+	
+	
+	//Yassine ********************************************
+	
 	// Relation entre manager et equipe
 	@OneToMany(mappedBy="managedBy")
 	private List<Equipe>  managerOf ;
+	
 	// Relation entre employe et equipe
-	@OneToMany(mappedBy="membreOf")
-	private List<Equipe>  employeOf ;
+	@ManyToOne
+	@JoinColumn(name="idEquipe", referencedColumnName="EQ_ID", insertable=false , updatable=false)
+	private Equipe  memberOf;
+	
 	// Relation entre manager et project
 	@OneToMany(mappedBy="ownedBy")
 	private List<Project>  ownerOF ;
-	// Relation entre employe et project
-	@ManyToOne
-	@JoinColumn(name="idProject", referencedColumnName="Project_ID", insertable=false , updatable=false, nullable = true)
-	private Project workOn;
+	
+	// Relation entre employee et assignements
+	@OneToMany(mappedBy="emp")
+	private List<Assignment>  assignments ;
+	
+	
+	//Yassine **************************************
 	public int getId() {
 		return id;
 	}
@@ -195,54 +205,11 @@ public class User implements Serializable{
 	public void setManagerOf(List<Equipe> managerOf) {
 		this.managerOf = managerOf;
 	}
-	public List<Equipe> getEmployeOf() {
-		return employeOf;
-	}
-	public void setEmployeOf(List<Equipe> employeOf) {
-		this.employeOf = employeOf;
-	}
 	public List<Project> getOwnerOF() {
 		return ownerOF;
 	}
 	public void setOwnerOF(List<Project> ownerOF) {
 		this.ownerOF = ownerOF;
-	}
-	public Project getWorkOn() {
-		return workOn;
-	}
-	public void setWorkOn(Project workOn) {
-		this.workOn = workOn;
-	}
-	public User(int id, String cin, String nom, String prenom, String adresseMail, String motdp, String photo,
-			String cv, String ville, String tel, int solde_conge,int solde_absence, Double salaire, Role role,Specialite specialite, List<Conge> conge,
-			List<Absence> absence, Set<Evaluation> evaluations, Mission mission, List<Equipe> managerOf,
-			List<Equipe> employeOf, List<Project> ownerOF, Project workOn) {
-		super();
-		this.id = id;
-		this.cin = cin;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.adresseMail = adresseMail;
-		this.motdp = motdp;
-		this.photo = photo;
-		this.cv = cv;
-		this.ville = ville;
-		this.tel = tel;
-		this.solde_conge = solde_conge;
-		this.solde_absence = solde_absence;
-
-		this.salaire = salaire;
-		this.role = role;
-		this.specialite = specialite;
-
-		this.conge = conge;
-		this.absence = absence;
-		Evaluations = evaluations;
-		this.mission = mission;
-		this.managerOf = managerOf;
-		this.employeOf = employeOf;
-		this.ownerOF = ownerOF;
-		this.workOn = workOn;
 	}
 	
 	public User( String cin, String nom, String prenom, String adresseMail, String motdp, String photo,
@@ -311,12 +278,7 @@ public class User implements Serializable{
 		this.role = role;
 		this.specialite = specialite;
 	}
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", cin=" + cin + ", nom=" + nom + ", prenom=" + prenom + ", adresseMail="
-				+ adresseMail + ", motdp=" + motdp + ", photo=" + photo + ", cv=" + cv + ", ville=" + ville + ", tel="
-				+ tel + ", solde_conge=" + solde_conge +  ", solde_absence=" + solde_absence +", salaire=" + salaire + "]";
-	}
+	
 	public int getSolde_absence() {
 		return solde_absence;
 	}
@@ -329,6 +291,8 @@ public class User implements Serializable{
 	public void setSpecialite(Specialite specialite) {
 		this.specialite = specialite;
 	}
+	
+	
 	
 
 }

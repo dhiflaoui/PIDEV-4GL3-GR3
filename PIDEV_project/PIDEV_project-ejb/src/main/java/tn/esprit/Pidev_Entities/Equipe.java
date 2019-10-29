@@ -18,11 +18,20 @@ public class Equipe implements Serializable {
 	@GeneratedValue( strategy= GenerationType.IDENTITY) 
 	@Column(name="EQ_ID") 
 	int id; 
+	
+	
 	@ManyToOne
 	@JoinColumn(name="idManager", referencedColumnName="UT_ID", insertable=false , updatable=false, nullable = true)
 	private User managedBy;
-	@ManyToOne
-	@JoinColumn(name="idEmploye", referencedColumnName="UT_ID", insertable=false , updatable=false, nullable = true)
-	private User membreOf;
+	
+	
+	@OneToMany(mappedBy="memberOf")
+	private List<User>  members ;
+	
+	
+	private String title ;
+	private String description;
+	private String score ;
+	
 
 }
