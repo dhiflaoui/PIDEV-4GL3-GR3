@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="title">
+		<title>INDEX</title>
+	</ui:define>
+
+	<ui:define name="content">
+
+
+
+
+
+		<div class="col-md-6">
+			<!-- START card-->
+			<div class="card ">
+							<h1 class="text-warning">Formulaire Ajout Formation</h1>
+			
+				<div class="card-body">
+					<h:form class="form-horizontal">
+
+						<div class="form-group">
+							<label>Titre</label>
+							<h:inputText class="form-control" type="text"
+								value="#{formationBean.titre}" />
+						</div>
+
+						<div class="form-group">
+							<label>Objectifs</label>
+							<h:inputText class="form-control" type="text"
+								value="#{formationBean.objectifs}" />
+						</div>
+						<div class="form-group">
+							<label>Date</label>
+							<h:inputText class="form-control" type="text"
+								value="#{formationBean.date}" />
+						</div>
+						<div class="form-group">
+							<label>Duree</label>
+							<h:inputText class="form-control" type="text"
+								value="#{formationBean.duree}" />
+						</div>
+						<div class="form-group">
+							<label>Prix</label>
+							<h:inputText class="form-control" type="text"
+								value="#{formationBean.prix}" />
+						</div>
+						<div class="form-group">
+							<label>Nombre de place</label>
+							<h:inputText class="form-control" type="text"
+								value="#{formationBean.nbrP}" />
+						</div>
+						<div class="form-group">
+							<label>language</label>
+							<h:selectOneMenu class="custom-select custom-select-sm"
+								value="#{formationBean.specialite}">
+								<f:selectItem itemLabel="Choisir" />
+								<f:selectItems value="#{specilite.specialites}" />
+							</h:selectOneMenu>
+						</div>
+					<div class="form-group">
+							<label>Formateur</label>
+					
+						<h:selectOneMenu class="custom-select custom-select-sm"
+						
+							value="#{formationBean.selectFormateurById}">
+																<f:selectItem itemLabel="Choisir " />
+							
+							<f:selectItems value="#{formationBean.formateurs}" var="user"
+								itemValue="#{user.id}" itemLabel="#{user.nom}" />
+						</h:selectOneMenu>
+</div>
+
+						<h:commandButton class="mb-sm btn btn-success" value="Ajouter"
+							action="#{formationBean.ajouterFormation()}" />
+						<p>
+							<small class="text-muted">* Integer fermentum accumsan
+								metus, id sagittis ipsum molestie vitae</small>
+						</p>
+					</h:form>
+				</div>
+
+
+
+			</div>
+		</div>
+
+
+
+
+	</ui:define>
+
+
+</ui:composition>

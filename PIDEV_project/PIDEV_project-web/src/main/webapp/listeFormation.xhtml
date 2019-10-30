@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="title">
+		<title>Les formateurs</title>
+
+	</ui:define>
+
+	<ui:define name="content">
+
+
+
+
+		<div class="card card-default">
+			<h:form enctype="multipart/form-data">
+				<h1 class="text-warning">LES FORMATIONS</h1>
+				<div class="card-body">
+					<!-- START table-responsive-->
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+
+									<th>Titre</th>
+									<th>Objectifs</th>
+									<th>Date</th>
+									<th>Duree</th>
+									<th>Formateur</th>
+									<th>Language</th>
+									<th>Prix</th>
+									<th>Nombre de place</th>
+
+								</tr>
+							</thead>
+							<tbody>
+
+								<ui:repeat value="#{formationBean.formations}" var="item">
+									<tr>
+										<td>#{item.titre}</td>
+										<td>#{item.objectifs}</td>
+										<td>#{item.date}</td>
+										<td>#{item.duree}</td>
+										<td>#{item.formateur.nom} #{item.formateur.prenom}</td>
+										<td>#{item.specialtie}</td>
+										<td>#{item.prix}</td>
+										<td>#{item.nbrP}</td>
+
+
+										<td><h:commandButton class="mb-sm btn btn-danger"
+												value="Supprimer"
+												action="#{formationBean.removeFormation(item.id)}" /> <h:commandButton
+												class="mb-sm btn btn-info" value="Modifier"
+												action="#{formationBean.modifier(item)}" /></td>
+
+
+									</tr>
+								</ui:repeat>
+
+							</tbody>
+						</table>
+					</div>
+					<!-- END table-responsive-->
+				</div>
+			</h:form>
+		</div>
+
+
+		<div class="card-body">
+			<h:form enctype="multipart/form-data">
+
+
+				<div class="form-group">
+					<h:inputHidden value="#{formationBean.formationIdToBeUpdated}" />
+				</div>
+
+
+
+				<div class="form-group">
+					<label>Titre</label>
+					<h:inputText class="form-control" type="text"
+						value="#{formationBean.titre}" />
+				</div>
+
+				<div class="form-group">
+					<label>Objectifs</label>
+					<h:inputText class="form-control" type="text"
+						value="#{formationBean.objectifs}" />
+				</div>
+				<div class="form-group">
+					<label>Date</label>
+					<h:inputText class="form-control" type="text"
+						value="#{formationBean.date}" />
+				</div>
+				<div class="form-group">
+					<label>Duree</label>
+					<h:inputText class="form-control" type="text"
+						value="#{formationBean.duree}" />
+				</div>
+				<div class="form-group">
+					<label>Prix</label>
+					<h:inputText class="form-control" type="text"
+						value="#{formationBean.prix}" />
+				</div>
+				<div class="form-group">
+					<label>Nombre de place</label>
+					<h:inputText class="form-control" type="text"
+						value="#{formationBean.nbrP}" />
+				</div>
+				<div class="form-group">
+					<label>Language</label>
+					<h:selectOneMenu class="custom-select custom-select-sm"
+						value="#{formationBean.specialite}">
+						<f:selectItem itemLabel="Choisir specialite" />
+						<f:selectItems value="#{specilite.specialites}" />
+					</h:selectOneMenu>
+				</div>
+
+				<div class="form-group">
+					<label>Formateur</label>
+
+					<h:selectOneMenu class="custom-select custom-select-sm"
+						value="#{formationBean.selectUserById}">
+						<f:selectItems value="#{formationBean.formateurs}" var="user"
+							itemValue="#{user.id}" itemLabel="#{user.nom}" />
+					</h:selectOneMenu>
+				</div>
+				<h:commandButton class="btn btn-oval btn-success" action="#{formationBean.mettreAjourEmploye()}"
+					value="Confirmer" />
+				<p>
+					<small class="text-muted">* Integer fermentum accumsan
+						metus, id sagittis ipsum molestie vitae</small>
+				</p>
+			</h:form>
+		</div>
+
+	</ui:define>
+
+
+</ui:composition>
