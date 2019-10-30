@@ -11,6 +11,7 @@ import javax.persistence.TypedQuery;
 import tn.esprit.Pidev_Entities.Affectation;
 import tn.esprit.Pidev_Entities.Disponible;
 import tn.esprit.Pidev_Entities.Formateur;
+import tn.esprit.Pidev_Entities.Formation;
 import tn.esprit.Pidev_Interfaces.IAffectationServiceRemote;
 
 @Stateless
@@ -42,6 +43,10 @@ public class AffectationService implements IAffectationServiceRemote {
 		
 		List<Affectation> results = emp.getResultList();
 		return results;
+	}
+	@Override
+	public Affectation getAffectationById(int idFormation) {
+		return em.find(Affectation.class, idFormation);
 	}
 
 }

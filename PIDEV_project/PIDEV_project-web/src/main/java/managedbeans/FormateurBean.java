@@ -1,6 +1,7 @@
 package managedbeans;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -27,8 +28,9 @@ public class FormateurBean implements Serializable {
 	@EJB
 	FormateurService formateurService;
 
-	public void ajouterFormateur() {
+	public String ajouterFormateur() throws ParseException {
 		formateurService.ajouterFormateur(new Formateur(nom, prenom, email, numero, disponible, specialite) );
+		return "successAFormateur?faces-redirect=true";
 	}
 
 	private List<Formateur> employes;

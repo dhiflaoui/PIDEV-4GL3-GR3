@@ -9,5 +9,6 @@ public interface IAffectationServiceRemote {
 	public void SupprimerAffectation(int formateurId);
 	public int ajouterAffectation(Affectation f);
 	public List<Affectation> getAllAffectation() ;
+	public Affectation getAffectationById(int idFormation);
 
 }

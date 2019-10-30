@@ -1,6 +1,7 @@
 package managedbeans;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -40,15 +41,18 @@ public class FormationBean implements Serializable {
 	FormateurService formateurService;
 
 
-	public void ajouterFormation() {
+	public String ajouterFormation() throws ParseException {
 		Formateur forSelected = formateurService.getFormateurById(selectFormateurById);
 
 		Formation abs = new Formation(titre, objectifs, date, duree,prix,nbrP,  specialite);
 		abs.setFormateur(forSelected);
 		formationService.ajouterFormation(abs);
-	
+		return "successAFormation?faces-redirect=true";
+
 	}
 	public void mettreAjourEmploye() {
+		System.out.println("ooooooooooo");
+
 		Formateur forSelected = formateurService.getFormateurById(selectFormateurById);
 
 		Formation f = new Formation(Integer.valueOf(this.formateurIdToBeUpdated),titre, objectifs, date, duree,prix,nbrP, formateur, specialite);

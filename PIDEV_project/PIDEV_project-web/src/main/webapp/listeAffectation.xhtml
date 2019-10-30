@@ -28,6 +28,8 @@
 									<th>Ingenieur</th>
 									<th>Formation</th>
 									<th>Score</th>
+																		<th>Montion</th>
+									
 
 
 								</tr>
@@ -39,11 +41,12 @@
 										<td>#{item.formations.titre}</td>
 										<td>#{item.users.nom} #{item.users.prenom}</td>
 										<td>#{item.score}</td>
+										<td>#{item.montion}</td>
+
 										<td><h:commandButton class="mb-sm btn btn-danger"
 												value="Supprimer"
-												action="#{affectationBean.removeAffectation(item.id)}" /> 
-												<h:commandButton
-												class="mb-sm btn btn-info" value="Modifier"
+												action="#{affectationBean.removeAffectation(item.id)}" /> <h:commandButton
+												class="mb-sm btn btn-info" value="validation"
 												action="#{affectationBean.modifier(item)}" /></td>
 
 
@@ -66,33 +69,38 @@
 				<div class="form-group">
 					<h:inputHidden value="#{affectationBean.formationIdToBeUpdated}" />
 				</div>
+<div class="form-group">
+					
+					<h:inputHidden class="custom-select custom-select-sm"
+						value="#{affectationBean.selectForamtionrById}">
+						<f:selectItems value="#{affectationBean.allformation}" var="user"
+							itemValue="#{user.id}" itemLabel="#{user.titre}" />
+					</h:inputHidden>
+				</div>
 				<div class="form-group">
-					<label>Ingenieur</label>
 
-					<h:selectOneMenu class="custom-select custom-select-sm"
+					<h:inputHidden class="custom-select custom-select-sm"
 						value="#{affectationBean.selectUserById}">
 						<f:selectItems value="#{affectationBean.users}" var="user"
 							itemValue="#{user.id}" itemLabel="#{user.nom}" />
-					</h:selectOneMenu>
+					</h:inputHidden>
 				</div>
-				<div class="form-group">
-					<label>Foramation</label>
 
-					<h:selectOneMenu class="custom-select custom-select-sm"
-						value="#{affectationBean.selectForamtionrById}">
-						<f:selectItems value="#{affectationBean.allformation }" var="user"
-							itemValue="#{user.id}" itemLabel="#{user.titre}" />
-					</h:selectOneMenu>
-				</div>
 				<div class="form-group">
 					<label>Score</label>
 					<h:inputText class="form-control" type="text"
 						value="#{affectationBean.score}" />
 				</div>
-				<h:commandButton
-				class="btn btn-oval btn-success"
+				
+				<div class="form-group">
+					<label>Montion</label>
+					<h:inputText class="form-control" type="text"
+						value="#{affectationBean.montion}" />
+				</div>
+				
+				<h:commandButton class="btn btn-oval btn-success"
 					action="#{affectationBean.mettreAjourAffectation()}"
-					value="Confirmer" />
+					value="Valider" />
 
 
 

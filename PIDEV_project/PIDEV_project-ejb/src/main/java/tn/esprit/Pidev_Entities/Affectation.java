@@ -30,6 +30,26 @@ public class Affectation implements Serializable {
 	
 	@Column(name="Score")
 	private Integer score ;
+	
+	@Column(name="Montion")
+	private String montion ;
+
+	public String getMontion() {
+		return montion;
+	}
+
+	public Affectation(int id, Formation formations, User users, Integer score, String montion) {
+		super();
+		Id = id;
+		this.formations = formations;
+		this.users = users;
+		this.score = score;
+		this.montion = montion;
+	}
+
+	public void setMontion(String montion) {
+		this.montion = montion;
+	}
 
 	public int getId() {
 		return Id;
@@ -73,10 +93,12 @@ public class Affectation implements Serializable {
 		this.score = score;
 	}
 
-	public Affectation(int id,  Integer score) {
+	
+
+	public Affectation(int id, Integer score, String montion) {
 		super();
 		Id = id;
-			this.score = score;
+		
 	}
 
 	@Override

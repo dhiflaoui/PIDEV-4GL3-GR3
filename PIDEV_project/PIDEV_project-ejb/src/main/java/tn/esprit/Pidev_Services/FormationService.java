@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import tn.esprit.Pidev_Entities.Formation;
+import tn.esprit.Pidev_Entities.User;
 import tn.esprit.Pidev_Interfaces.IFormationServiceRemote;
 
 @Stateless
@@ -23,6 +24,11 @@ public class FormationService implements IFormationServiceRemote {
 	@Override
 	public void modifierFormation(Formation fo) {
 		em.merge(fo);
+
+	}
+	@Override
+	public void modifierUser(User u) {
+		em.merge(u);
 
 	}
 
