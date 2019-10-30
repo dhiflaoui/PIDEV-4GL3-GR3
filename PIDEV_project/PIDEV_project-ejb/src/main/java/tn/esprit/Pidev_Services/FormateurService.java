@@ -11,6 +11,7 @@ import javax.persistence.TypedQuery;
 
 import tn.esprit.Pidev_Entities.Formation;
 import tn.esprit.Pidev_Entities.User;
+import tn.esprit.Pidev_Entities.Conge;
 import tn.esprit.Pidev_Entities.Disponible;
 import tn.esprit.Pidev_Entities.Formateur;
 import tn.esprit.Pidev_Interfaces.IFormateurServiceRemote;
@@ -73,7 +74,12 @@ public List<User> getAllUsers() {
 			User emp = em.find(User.class, formateurId);
 			return  emp;
 		}
-
+		@Override
+		public Conge getCongeById(int idConge) 
+		{
+			Conge emp = em.find(Conge.class, idConge);
+			return  emp;
+		}
 		
 		@Override
 		public List<Formateur> formateursDisponibleEtMemeSpecialite(Formateur format) {

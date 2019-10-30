@@ -20,5 +20,6 @@ public interface IFormateurServiceRemote {
 	public User getUserById(int formateurId);
 	public List<User> getAllUsers();
 	public List<Formateur> getAllFormateursDis();
+	public Conge getCongeById(int idConge);
 
 }
