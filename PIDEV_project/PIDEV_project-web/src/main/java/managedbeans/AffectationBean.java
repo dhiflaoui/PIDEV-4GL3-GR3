@@ -61,6 +61,7 @@ public class AffectationBean implements Serializable {
 		int nbrPlace = formationSelected.getNbrP();
 		double salaire = userSelected.getSalaire();
 		int prix = formationSelected.getPrix();
+		
 		if (nbrPlace == 0) {
 			return "echecAAffectationP?faces-redirect=true";
 
