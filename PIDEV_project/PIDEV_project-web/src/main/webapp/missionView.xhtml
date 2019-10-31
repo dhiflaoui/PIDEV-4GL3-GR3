@@ -37,6 +37,9 @@
 									<th>Location</th>
 									<th>Description</th>
 									<th>Type Mission</th>
+									<th>Date Creation</th>
+									<th>Derniere  Modification</th>
+									
 								</tr>
 							</thead>
 							<tbody>
@@ -53,14 +56,17 @@
 										<td>#{donne.location}</td>
 										<td>#{donne.description}</td>
 										<td>#{donne.specialite}</td>
+										<td>#{donne.created}</td>
+										<td>#{donne.updated}</td>
 
 
 
 										<td>
 											<td><h:commandLink class="fa fa-edit"
-													action="#{MissionBean.update(donne)}" /> <h:commandButton
-													action="#{MissionBean.removeMission(donne.id)}"
-													value="Delete" /></td>
+													action="#{MissionBean.update(donne)}" /><br></br>
+													 <h:commandLink
+													 class="fa fa-trash" aria-hidden="true"
+													action="#{MissionBean.removeMission(donne.id)}" /></td>
 
 										</td>
 
@@ -81,11 +87,14 @@
 
 			<div class="card-body">
 				<h:form enctype="multipart/form-data">
-					<div class="form-group">
-						<label>Mission</label>
-						<h:inputTextarea class="form-control" rows="3"
-							value="#{MissionBean.name}" />
-					</div>
+					<label>Mission</label>
+					<h:inputTextarea class="form-control" rows="3"
+						value="#{MissionBean.name}" label="name">
+						<f:validator validatorId="loginValidator" />
+					</h:inputTextarea>
+					<h:messages />
+
+
 
 
 
@@ -94,7 +103,7 @@
 						value="#{MissionBean.dateStart}" label="name">
 						<f:validator validatorId="loginValidator" />
 					</h:inputText>
-					<h:messages/>
+					<h:messages />
 
 
 
@@ -103,18 +112,28 @@
 					<div class="form-group">
 						<label>Date Arriver</label>
 						<h:inputText class="form-control" type="text"
-							value="#{MissionBean.dateEnd}" />
+							value="#{MissionBean.dateEnd}" label="name">
+							<f:validator validatorId="loginValidator" />
+						</h:inputText>
+						<h:messages />
+
 
 					</div>
 					<div class="form-group">
 						<label>Location</label>
 						<h:inputText class="form-control" type="text"
-							value="#{MissionBean.location}" />
+							value="#{MissionBean.location}" label="name">
+							<f:validator validatorId="loginValidator" />
+						</h:inputText>
+						<h:messages />
 					</div>
 					<div class="form-group">
 						<label>Description Détaillée</label>
 						<h:inputText class="form-control" type="text"
-							value="#{MissionBean.description}" />
+							value="#{MissionBean.description}" label="name">
+							<f:validator validatorId="loginValidator" />
+						</h:inputText>
+						<h:messages />
 					</div>
 					<div class="form-group">
 						<label>Specialité Demandé </label>
@@ -131,12 +150,11 @@
 
 
 
-					<h:commandButton action="#{MissionBean.updateMissionn()}"
-						value="Mettre a jour User" />
+					<h:commandLink action="#{MissionBean.updateMissionn()}"
+						class="fa fa-check" aria-hidden="true" />
 
 					<p>
-						<small class="text-muted">* Integer fermentum accumsan
-							metus, id sagittis ipsum molestie vitae</small>
+						<small class="text-muted">* Valider les modifications</small>
 					</p>
 				</h:form>
 			</div>

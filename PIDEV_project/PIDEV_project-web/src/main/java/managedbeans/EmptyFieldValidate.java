@@ -15,9 +15,9 @@ public class EmptyFieldValidate implements Validator {
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
        
         
-        if(value!=null){
+        if(value==null){
            if(value.toString().trim().equals("")){
-               FacesMessage message=new FacesMessage(component.getAttributes().get("label")+" is empty");
+               FacesMessage message=new FacesMessage(component.getAttributes().get("label")+" le champs est vide");
                message.setSeverity(FacesMessage.SEVERITY_WARN);
                throw new ValidatorException(message);
            }
