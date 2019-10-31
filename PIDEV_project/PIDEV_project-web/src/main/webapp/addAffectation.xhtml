@@ -30,8 +30,8 @@
 
 							<h:selectOneMenu class="custom-select custom-select-sm"
 								value="#{affectationBean.selectUserById}">
-																	<f:selectItem itemLabel="Choisir " />
-								
+								<f:selectItem itemLabel="Choisir " />
+
 								<f:selectItems value="#{affectationBean.users}" var="user"
 									itemValue="#{user.id}" itemLabel="#{user.nom}" />
 							</h:selectOneMenu>
@@ -41,27 +41,22 @@
 
 							<h:selectOneMenu class="custom-select custom-select-sm"
 								value="#{affectationBean.selectForamtionrById}">
-																	<f:selectItem itemLabel="Choisir " />
-								
+								<f:selectItem itemLabel="Choisir " />
+
 								<f:selectItems value="#{affectationBean.allformation }"
 									var="user" itemValue="#{user.id}" itemLabel="#{user.titre}" />
 							</h:selectOneMenu>
 						</div>
-						<div class="form-group">
-							<label>Score</label>
-							<h:inputText class="form-control" type="text" label="0"
-								value="#{affectationBean.score}" />
-						</div>
+						
 
 
 
 
 
-                           
-						<h:commandButton class="mb-sm btn btn-success" value="Ajouter" 
-							action="#{affectationBean.affectation()}"
-							 />
-							
+
+						<h:commandButton class="mb-sm btn btn-success" value="Ajouter"
+							action="#{affectationBean.affectation()}" />
+
 						<p>
 							<small class="text-muted">* Integer fermentum accumsan
 								metus, id sagittis ipsum molestie vitae</small>

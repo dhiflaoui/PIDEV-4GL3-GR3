@@ -28,8 +28,8 @@
 									<th>Ingenieur</th>
 									<th>Formation</th>
 									<th>Score</th>
-																		<th>Montion</th>
-									
+									<th>Montion</th>
+
 
 
 								</tr>
@@ -69,8 +69,8 @@
 				<div class="form-group">
 					<h:inputHidden value="#{affectationBean.formationIdToBeUpdated}" />
 				</div>
-<div class="form-group">
-					
+				<div class="form-group">
+
 					<h:inputHidden class="custom-select custom-select-sm"
 						value="#{affectationBean.selectForamtionrById}">
 						<f:selectItems value="#{affectationBean.allformation}" var="user"
@@ -91,13 +91,9 @@
 					<h:inputText class="form-control" type="text"
 						value="#{affectationBean.score}" />
 				</div>
+
 				
-				<div class="form-group">
-					<label>Montion</label>
-					<h:inputText class="form-control" type="text"
-						value="#{affectationBean.montion}" />
-				</div>
-				
+
 				<h:commandButton class="btn btn-oval btn-success"
 					action="#{affectationBean.mettreAjourAffectation()}"
 					value="Valider" />

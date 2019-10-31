@@ -5,7 +5,7 @@
 	version="2.5">
 	<display-name>advyteam-web</display-name>
 	<welcome-file-list>
-		<welcome-file>addFormateur.xhtml</welcome-file>
+		<welcome-file>index.xhtml</welcome-file>
 
 	</welcome-file-list>
 

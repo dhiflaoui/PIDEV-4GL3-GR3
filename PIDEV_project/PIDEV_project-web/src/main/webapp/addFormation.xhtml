@@ -25,19 +25,40 @@
 
 						<div class="form-group">
 							<label>Titre</label>
-							<h:inputText class="form-control" type="text"
-								value="#{formationBean.titre}" />
+							<h:inputText class="form-control" type="text" id="validatePrenom"
+								required="true" requiredMessage="Entrez le Titre"
+								validatorMessage="le Titre doit etre entre 5 et 25"
+								value="#{formationBean.titre}">
+								<f:validateLength minimum="5" maximum="25" for="validatePrenom" />
+
+							</h:inputText>
+							<h:message for="validatePrenom" style="color:red" />
 						</div>
 
 						<div class="form-group">
 							<label>Objectifs</label>
-							<h:inputText class="form-control" type="text"
-								value="#{formationBean.objectifs}" />
+							<h:inputText class="form-control" type="text" id="validateo"
+								required="true" requiredMessage="Entrez le Objectifs"
+								validatorMessage="le  Objectif doit etre entre 8 et 25"
+								value="#{formationBean.objectifs}">
+								<f:validateLength minimum="8" maximum="25" for="validateo" />
+
+							</h:inputText>
+							<h:message for="validateo" style="color:red" />
+
 						</div>
 						<div class="form-group">
 							<label>Date</label>
-							<h:inputText class="form-control" type="text"
-								value="#{formationBean.date}" />
+							<h:inputText class="form-control" type="text" id="validated"
+								required="true" requiredMessage="Entrez la date"
+								validatorMessage="la date doit etre comme jj/mm/yyyy"
+								value="#{formationBean.date}">
+								<f:validateRegex pattern="[0-3]{1}[0-9]{1}[/][0-1]{1}[0-9]{1}[/][0-9]{4}"
+									for="validated" />
+
+							</h:inputText>
+							<h:message for="validated" style="color:red" />
+
 						</div>
 						<div class="form-group">
 							<label>Duree</label>
@@ -46,8 +67,15 @@
 						</div>
 						<div class="form-group">
 							<label>Prix</label>
-							<h:inputText class="form-control" type="text"
-								value="#{formationBean.prix}" />
+							<h:inputText class="form-control" type="text" id="validatePr"
+								required="true" requiredMessage="Entrez le Prix"
+								validatorMessage="le Prix pas logic !"
+								value="#{formationBean.prix}">
+								<f:validateDoubleRange minimum="10" maximum="800"
+									for="validatePr" />
+							</h:inputText>
+							<h:message for="validatePr" style="color:red" />
+
 						</div>
 						<div class="form-group">
 							<label>Nombre de place</label>
