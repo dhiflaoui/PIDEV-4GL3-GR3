@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/mobile"
+	  xmlns:b="http://bootsfaces.net/ui"
+
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	
+	template="/WEB-INF/tempRH/template.xhtml">
+
+	<ui:define name="title">
+		<title>EQUIPE ADVYTEAM</title>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+		</h:form>
+
+
+
+
+		<div class="card card-default">
+			<h:form enctype="multipart/form-data">
+
+				<div class="card-header">EQUIPE ADVYTEAM</div>
+				<div class="card-body">
+					<!-- START table-responsive-->
+
+					
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>Mission</th>
+										<th>Date Aller</th>
+										<th>Date Arriver</th>
+										<th>Location</th>
+										<th>Description</th>
+										<th>Type Mission</th>
+									</tr>
+								</thead>
+								<tbody>
+
+									<ui:repeat value="#{MissionBean.missionn}" var="donne">
+										<tr>
+
+
+
+											<td>#{donne.name}</td>
+											<td>#{donne.dateStart}</td>
+											<td>#{donne.dateEnd}</td>
+
+											<td>#{donne.location}</td>
+											<td>#{donne.description}</td>
+											<td>#{donne.specialite}</td>
+
+
+
+
+										</tr>
+									</ui:repeat>
+
+								</tbody>
+							</table>
+
+						</div>
+					<!-- END table-responsive-->
+				</div>
+			</h:form>
+
+		</div>
+
+	</ui:define>
+	
+
+
+</ui:composition>

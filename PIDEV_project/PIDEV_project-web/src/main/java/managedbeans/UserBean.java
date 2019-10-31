@@ -100,6 +100,9 @@ public class UserBean implements Serializable {
 		this.setSalaire(user.getSalaire()); 
 
 		this.setUserIdToBeUpdated(user.getId()); }
+	
+	
+	
 	public void mettreAjourUser(){ 
 		employeService.updateUser(new User(userIdToBeUpdated, cin,  nom,  prenom,  adresseMail,  motdp,  ville,  tel,  solde_conge,solde_absence,  salaire,  role, specialite)); }
 public void removeEmploye(int employeId) {
