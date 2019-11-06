@@ -42,16 +42,18 @@
     <dependencies>
 
         <!-- Depend on the ejb module and war so that we can package them -->
-        <dependency>
-            <groupId>tn.esprit</groupId>
-            <artifactId>PIDEV_project-web</artifactId>
-            <type>war</type>
-        </dependency>
+        
         <dependency>
             <groupId>tn.esprit</groupId>
             <artifactId>PIDEV_project-ejb</artifactId>
             <type>ejb</type>
         </dependency>
+        <dependency>
+            <groupId>tn.esprit</groupId>
+            <artifactId>PIDEV_project-web</artifactId>
+            <type>war</type>
+        </dependency>
+        
     </dependencies>
 
     <build>
