@@ -39,7 +39,8 @@ public class Project implements Serializable {
 	@OneToMany(mappedBy="project" , cascade = CascadeType.ALL)
 	private List<Task>  tasks;
 	
-
+	@OneToMany(mappedBy="project" , cascade = CascadeType.ALL)
+	private List<Bug>  bugs;
 
 	public Project() {
 		super();
@@ -107,8 +108,5 @@ public class Project implements Serializable {
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
 	}
-	
-	
-	
-	
+		
 }

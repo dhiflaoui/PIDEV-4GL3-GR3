@@ -12,7 +12,7 @@ import tn.esprit.Pidev_Entities.Conge;
 @Stateless
 @LocalBean
 public class CongeService implements CongeServiceRemote ,CongeServiceLocal {
-	@PersistenceContext
+	@PersistenceContext(unitName = "pidev-ejb")
 	EntityManager em;
 	
 	@Override

@@ -14,7 +14,7 @@ import tn.esprit.Pidev_Entities.Absence;
 @Stateless
 @LocalBean
 public class AbsenceService implements AbsenceServiceRemote ,AbsenceServiceLocal {
-	@PersistenceContext
+	@PersistenceContext(unitName = "pidev-ejb")
 	EntityManager em;
 	
 	@Override

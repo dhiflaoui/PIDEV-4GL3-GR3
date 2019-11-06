@@ -42,13 +42,13 @@ public class Equipe implements Serializable {
 	
 	public Equipe() {
 		super();
+		this.score=0;
 	}
 
 	public Equipe(String title, String description, int score) {
 		super();
 		this.title = title;
 		this.description = description;
-		this.score = score;
 	}
 	
 	public Equipe(User managedBy, String title, String description, int score) {
@@ -56,7 +56,6 @@ public class Equipe implements Serializable {
 		this.managedBy = managedBy;
 		this.title = title;
 		this.description = description;
-		this.score = score;
 	}
 
 

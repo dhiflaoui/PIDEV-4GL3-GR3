@@ -18,7 +18,7 @@ import tn.esprit.Pidev_Entities.*;
 @LocalBean
 public class EquipeService implements EquipeServiceRemote ,EquipeServiceLocal {
 	
-	@PersistenceContext
+	@PersistenceContext(unitName = "pidev-ejb")
 	EntityManager em;
 	
 	

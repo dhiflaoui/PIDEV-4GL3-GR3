@@ -17,7 +17,7 @@ import tn.esprit.Pidev_Entities.User;
 @LocalBean
 public class EmployeService implements EmployeServiceRemote ,EmployeServiceLocal {
 	
-	@PersistenceContext
+	@PersistenceContext(unitName = "pidev-ejb")
 	EntityManager em;
 
 	@Override

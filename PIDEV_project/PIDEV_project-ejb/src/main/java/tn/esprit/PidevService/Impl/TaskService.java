@@ -16,7 +16,7 @@ import tn.esprit.Pidev_Entities.*;
 @LocalBean
 public class TaskService implements TaskServiceRemote ,TaskServiceLocal {
 	
-	@PersistenceContext
+	@PersistenceContext(unitName = "pidev-ejb")
 	EntityManager em;
 	
 	
