@@ -1,6 +1,8 @@
 package tn.esprit.PidevService.Interf;
 
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
 import tn.esprit.Pidev_Entities.*;
@@ -9,7 +11,7 @@ import tn.esprit.Pidev_Entities.*;
 public interface ProjectServiceRemote {
 	public int AddProject(Project project,User user);
 	public Project getProjectById(int id);
-	public Project getProjectByOwner(User user);
+	public List<Project> getProjectByOwner(User user);
 	public List<Project> getAllProjects();
 	public void UpdateProject(Project project);
 }

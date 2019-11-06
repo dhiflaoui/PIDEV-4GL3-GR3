@@ -1,96 +1,99 @@
-package tn.esprit.timesheet.managedbeans;
+package managedbeans;
 
 import java.io.Serializable;
-
+import java.util.Date;
+import java.util.List;
 
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
+import mailer.SendMail;
+import models.Mail;
+import tn.esprit.PidevService.Impl.AbsenceService;
+import tn.esprit.PidevService.Impl.EmployeService;
+import tn.esprit.Pidev_Entities.ABS_Etat;
+import tn.esprit.Pidev_Entities.Absence;
+import tn.esprit.Pidev_Entities.User;
 
-import tn.esprit.imputation.entities.Employe;
-import tn.esprit.imputation.entities.EmployeService;
-import tn.esprit.imputation.entities.Role;
-
-@ManagedBean(name = "teamBean")
+@ManagedBean(name = "teamBean") 
 @SessionScoped
 public class TeamBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private String login;
-	private String password;
-	private Employe employe;
-	private Boolean loggedIn;
-	@EJB
-	EmployeService employeService;
+	private String title;
+    private String description;
 
-	public String doLogin() {
-		String navigateTo = "null";
-		employe = employeService.getEmployeByEmailAndPassword(login, password);
-		if (employe != null && employe.getRole() == Role.ADMINISTRATEUR) {
-			navigateTo = "/pages/admin/welcome?faces-redirect=true";
-			loggedIn = true;
-		} else {
-			FacesContext.getCurrentInstance().addMessage("form:btn", new FacesMessage("Bad Credentials"));
-		}
-		return navigateTo;
+	private int selectUserById;
+	private int selectEquipeById;
+	
+	
+	@EJB EquipeService equipeService;
+	
+	private List<Equipe> equipes;
+	
+	
+	public List<Equipe> getAllEquipes(){
+		equipes = equipeService.getAllEquipes(); 
+		return equipes;
+	}
+	
+	public List<Equipe> getMyEquipes(){
+		equipes = equipeService.getMyEquipes();  
+		return equipes;
+	}
+	
+	@EJB EmployeService employeService;
+	
+	private List<User> users;
+	
+	public List<User> getUsers(){
+		users = employeService.getAllUser(); 
+		return users;
+	}
+	
+	
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+	
+	public String AssignToTeam() {
+		User userSelected = employeService.getUserById(selectUserById);
+		Equipe equipeSelected = equipeService.getEquipeById(selectEquipe);
+		equipeService.AssignUserTo(equipeSelected,userSelected);
+		System.out.println(userSelected.getNom()+"assigné avec succés à "+equipeSelected.getTitle());
+		return "succes-Assignement-Equipe?faces-redirect=true";
+	}
+	
+	public EmployeService getEmployeService() {
+		return employeService;
+	}
+	
+	public void setEmployeService(EmployeService employeService) {
+		this.employeService = employeService;
+	}
+	
+	public EquipeService getEquipeService() {
+		return equipeService;
+	}
+	
+	public void setEquipeService(EquipeService equipeService) {
+		this.equipeService = equipeService;
+	}
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
-public String doLogout()
-{FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-return "/login?faces-redirect=true";}
+	
+	public int getSelectUserById() {
+		return selectUserById;
+	}
 
+	public void setSelectUserById(int selectUserById) {
+		this.selectUserById = selectUserById;
+	}
 
-
-
-public LoginBean() {
-	super();
-}
-
-public String getLogin() {
-	return login;
-}
-
-public void setLogin(String login) {
-	this.login = login;
-}
-
-public String getPassword() {
-	return password;
-}
-
-public void setPassword(String password) {
-	this.password = password;
-}
-
-public Employe getEmploye() {
-	return employe;
-}
-
-public void setEmploye(Employe employe) {
-	this.employe = employe;
-}
-
-public Boolean getLoggedIn() {
-	return loggedIn;
-}
-
-public void setLoggedIn(Boolean loggedIn) {
-	this.loggedIn = loggedIn;
-}
-
-public EmployeService getEmployeService() {
-	return employeService;
-}
-
-public void setEmployeService(EmployeService employeService) {
-	this.employeService = employeService;
-}
-
-public static long getSerialversionuid() {
-	return serialVersionUID;
-}
+	
 
 
 

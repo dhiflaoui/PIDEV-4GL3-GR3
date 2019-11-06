@@ -100,6 +100,18 @@ public class User implements Serializable{
 	public int getId() {
 		return id;
 	}
+	public Equipe getMemberOf() {
+		return memberOf;
+	}
+	public void setMemberOf(Equipe memberOf) {
+		this.memberOf = memberOf;
+	}
+	public List<Assignment> getAssignments() {
+		return assignments;
+	}
+	public void setAssignments(List<Assignment> assignments) {
+		this.assignments = assignments;
+	}
 	public void setId(int id) {
 		this.id = id;
 	}

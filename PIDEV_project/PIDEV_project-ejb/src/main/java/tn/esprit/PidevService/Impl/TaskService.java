@@ -23,7 +23,7 @@ public class TaskService implements TaskServiceRemote ,TaskServiceLocal {
 	public int AddTask(Project project,Task task)
 	{	
 		project.getTasks().add(task);
-		task.setProject()=project;
+		task.setProject(project);
 		em.persist(task);
 		em.merge(project);
  		return task.getId();
@@ -32,7 +32,7 @@ public class TaskService implements TaskServiceRemote ,TaskServiceLocal {
 	
 	
 
-	public Task getTasksById(int id);{
+	public Task getTasksById(int id){
 		TypedQuery<Task> query = em.createQuery("select t from Task t where t.id=:id", Task.class);
 		query.setParameter("id", id);
 		Task task = null;
@@ -64,11 +64,11 @@ public class TaskService implements TaskServiceRemote ,TaskServiceLocal {
 		return null ;
 	}
 	
-	public List<Tasks>getTasksByProject(Project project){
+	public List<Task>getTasksByProject(Project project){
          	TypedQuery<Task> query = em.createQuery("select task t join t.project e where e.id=:id", Task.class);
-			query.setParameter("id", project.id);
+			query.setParameter("id", project.getId());
 			List<Task> tasks = null;
-			try { tasks = query..getResultList(); }
+			try { tasks = query.getResultList(); }
 			catch (Exception
 
 			e) { System.out.println("Erreur : " +
@@ -79,9 +79,8 @@ public class TaskService implements TaskServiceRemote ,TaskServiceLocal {
 
 	
 	
-	public void UpdateTask(Task task); {
+	public void UpdateTask(Task task){
 		em.merge(task); 
-	
 		}
 
 }

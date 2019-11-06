@@ -11,7 +11,7 @@ import javax.persistence.TypedQuery;
 
 import tn.esprit.PidevService.Interf.*;
 import tn.esprit.Pidev_Entities.*;
-import tn.esprit.examen_s2_2017.persistence.ReponseSondage;
+
 
 
 @Stateless
@@ -23,7 +23,7 @@ public class EquipeService implements EquipeServiceRemote ,EquipeServiceLocal {
 	
 	
 	@Override
-	public int public int AddEquipe(Equipe equipe , User user)
+	 public int AddEquipe(Equipe equipe , User user)
 	{	
 		if(user.getManagerOf() == null){
 			List<Equipe> equipes = new ArrayList<>();
@@ -66,20 +66,22 @@ public class EquipeService implements EquipeServiceRemote ,EquipeServiceLocal {
 		}
 		else
 		{
-			equipe.getMembers().add(User);
+			equipe.getMembers().add(user);
 			em.merge(equipe);
 		}
 	}
 	
 	public void UnAssignUser(User user) {
-		if (user.getMemberOf() == Null){
+		if (user.getMemberOf() == null){
 			 System.out.println("Erreur");
 		}
 		else
 		{
-			user.getMemberOf() = Null;
+			user.setMemberOf(null);;
 			em.merge(user);
 		}
 	}
+
+
 
 }

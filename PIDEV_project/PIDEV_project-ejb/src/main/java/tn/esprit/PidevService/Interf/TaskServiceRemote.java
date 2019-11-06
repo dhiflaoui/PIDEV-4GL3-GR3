@@ -1,6 +1,8 @@
 package tn.esprit.PidevService.Interf;
 
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
 import tn.esprit.Pidev_Entities.*;
@@ -10,6 +12,6 @@ public interface TaskServiceRemote {
 	public int AddTask(Project project,Task task);
 	public Task getTasksById(int id);
 	public Task getTaskByUser(User user);
-	public List<Tasks>getTasksByProject(Project project);
+	public List<Task>getTasksByProject(Project project);
 	public void UpdateTask(Task task);
 }

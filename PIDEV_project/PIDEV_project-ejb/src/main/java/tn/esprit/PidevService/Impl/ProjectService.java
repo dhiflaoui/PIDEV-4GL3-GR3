@@ -22,8 +22,8 @@ public class ProjectService implements ProjectServiceRemote ,ProjectServiceLocal
 	
 	public int AddProject(Project project,User user)
 	{	
-		project.setOwnedBy()=user;
-		user.getOwnerOf().add(project);
+		project.setOwnedBy(user);
+		user.getOwnerOF().add(project);
 		em.persist(project);
 		em.merge(user);
  		return project.getId();
@@ -52,9 +52,9 @@ public class ProjectService implements ProjectServiceRemote ,ProjectServiceLocal
 	
 	public List<Project> getProjectByOwner(User user) {
 		TypedQuery<Project> query = em.createQuery("select p from Project p where p.ownedBy=:id", Project.class);
-		query.setParameter("id", user.id);
+		query.setParameter("id", user.getId());
 		List<Project> projects = null;
-		try { projects = query..getResultList(); }
+		try { projects = query.getResultList(); }
 		catch (Exception
 
 		e) { System.out.println("Erreur : " +
@@ -64,29 +64,29 @@ public class ProjectService implements ProjectServiceRemote ,ProjectServiceLocal
 	}
 	
 	
-	public void UpdateProject(Project project); {
+	public void UpdateProject(Project project) 
+	   {
 		em.merge(project); 
-	
 		}
 	
 	public void AssignUserTo(Equipe equipe , User user) {
-		if (user.getMemberOf() == Null || user.getMemberOf()==equipe){
+		if (user.getMemberOf() == null || user.getMemberOf()==equipe){
 			 System.out.println("Erreur");
 		}
 		else
 		{
-			equipe.getMembers().add(User);
+			equipe.getMembers().add(user);
 			em.merge(equipe);
 		}
 	}
 	
 	public void UnAssignUser(User user) {
-		if (user.getMemberOf() == Null){
+		if (user.getMemberOf() == null){
 			 System.out.println("Erreur");
 		}
 		else
 		{
-			user.getMemberOf() = Null;
+			user.setMemberOf(null);;
 			em.merge(user);
 		}
 	}
