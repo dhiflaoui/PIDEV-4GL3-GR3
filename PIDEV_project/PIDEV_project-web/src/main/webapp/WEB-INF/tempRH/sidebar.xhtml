@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtmll/DTD/xhtmll-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<aside class="aside-container"> <!-- START Sidebar (left)-->
+	<div class="aside-inner">
+		<nav class="sidebar" data-sidebar-anyclick-close=""> <!-- START sidebar nav-->
+		<ul class="sidebar-nav">
+			<!-- START user info-->
+			<li class="has-user-block">
+				<div class="collapse" id="user-block">
+					<div class="item user-block">
+						<!-- User picture-->
+						<div class="user-block-picture">
+							<div class="user-block-status">
+								<img class="img-thumbnail rounded-circle" src="img/user/#{loginBean.userLoggedIn.photo}"
+									alt="Image" width="60" height="60" />
+								<div class="circle bg-success circle-lg"></div>
+							</div>
+						</div>
+						<!-- Name and Job-->
+						<div class="user-block-info">
+							<span class="user-block-name">Hello, #{loginBean.userLoggedIn.nom}</span><span
+								class="user-block-role">#{loginBean.userLoggedIn.role}</span>
+								<span
+								class="user-block-role">Votre salaire : #{loginBean.userLoggedIn.salaire} dt</span>
+								<span
+								class="user-block-role">Votre solde congé : #{loginBean.userLoggedIn.solde_conge} </span>
+								<span
+								class="user-block-role">Votre solde absence : #{loginBean.userLoggedIn.solde_absence} </span>
+						</div>
+					</div>
+				</div>
+			</li>
+			<!-- END user info-->
+			<!-- Iterates over all sidebar items-->
+			<li class="nav-heading "><span
+				data-localize="sidebar.heading.HEADER">Main Navigation</span></li>
+			<li class=" "><a href="#dashboard" title="Dashboard"
+				data-toggle="collapse">
+					 <em
+					class="icon-speedometer"></em><span
+					data-localize="sidebar.nav.DASHBOARD">Gestion Des Comptes</span>
+			</a>
+				<ul class="sidebar-nav sidebar-subnav collapse" id="dashboard">
+					<li class="sidebar-subnav-header">Dashboard</li>
+					<li class=" active"><a href="Inscription.jsf"
+						title="Dashboard v1"><span>Nouvelle Compte</span></a></li>
+					<li class=" "><a href="UsersListe.jsf" title="Liste des Users"><span>UsersListe</span></a></li>
+					<li class=" "><a href="dashboard_v3.html" title="Dashboard v3"><span></span></a></li>
+				</ul></li>
+
+
+			<li class=" "><a href="#layout" title="Layouts"
+				data-toggle="collapse"><em class="icon-layers"></em><span>Gestion des Absences</span></a>
+				<ul class="sidebar-nav sidebar-subnav collapse" id="layout">
+					<li class="sidebar-subnav-header">Layouts</li>
+					<li class=" "><a href="addAbsence.jsf" title="Horizontal"><span>Marquer une absence</span></a></li>
+
+					<li class=" "><a href="Liste-abs.jsf"
+						title="Horizontal"><span>Liste des Absence</span></a></li>
+
+				</ul></li>
+				
+				<li class=" "><a href="#layout" title="Layouts"
+				data-toggle="collapse"><em class="fas fa-plane"></em><span>Gestion des Missions</span></a>
+				<ul class="sidebar-nav sidebar-subnav collapse" id="layout">
+					<li class="sidebar-subnav-header">Layouts</li>
+					<li class=" "><a href="missionRequest.xhtml" title="Horizontal"><span>Créer Mission</span></a></li>
+
+					<li class=" "><a href="missionView.xhtml"
+						title="Horizontal"><span>Liste des Missions</span></a></li>
+
+				</ul></li>
+
+
+			<li class=" "><a href="#layout" title="Layouts"
+				data-toggle="collapse"><em class="icon-layers"></em><span>Gestion des Conges</span></a>
+				<ul class="sidebar-nav sidebar-subnav collapse" id="layout">
+					<li class="sidebar-subnav-header">Layouts</li>
+					<li class=" "><a href="Liste-conge.jsf" title="Horizontal"><span>Liste des demandes</span></a></li>
+
+
+				</ul></li>
+
+
+			
+			
+		</ul>
+		<!-- END sidebar nav--> </nav>
+	</div>
+	<!-- END Sidebar (left)--> </aside>
+	<!-- offsidebar-->
+</ui:composition>

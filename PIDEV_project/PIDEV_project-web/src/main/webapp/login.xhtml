@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+		template="WEB-INF/templateLogin/template.xhtml">
+	
+	
+
+
+	<ui:param name="page_name" value="Connexion" />
+
+	<ui:define name="menu">
+
+
+		<div class="container">
+
+			<h:form id="form" class="login-form">
+					<h1 class="text-danger">Login
+                          
+                        </h1>
+			
+				<h:message for="validate-login" style="color:red" />
+				<div class="txtb">
+					<h:inputText id="validate-login" type="text"
+						value="#{loginBean.cin}" required="true"
+						requiredMessage="login vide" validatorMessage="login erroné " />
+					<span data-placeholder="CIN"></span>
+				</div>
+				<h:message for="validate-password" style="color:red" />
+				<div class="txtb">
+					<h:inputSecret id="validate-password" value="#{loginBean.motdp}"
+						required="true" requiredMessage="password vide"
+						validatorMessage="password erroné" />
+					<span data-placeholder="Password"></span>
+				</div>
+
+				<h:commandButton class="logbtn" id="btn" value="Connexion"
+					action="#{loginBean.doLogin()}" />
+
+
+
+				
+			</h:form>
+
+			<script type="text/javascript">
+				$(".txtb input").on("focus", function() {
+					$(this).addClass("focus");
+				});
+
+				$(".txtb input").on("blur", function() {
+					if ($(this).val() == "")
+						$(this).removeClass("focus");
+				});
+			</script>
+
+		</div>
+
+	</ui:define>
+</ui:composition>

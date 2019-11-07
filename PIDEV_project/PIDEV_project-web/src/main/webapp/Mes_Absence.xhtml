@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	template="/WEB-INF/tempUser/template.xhtml">
+
+
+
+	<ui:define name="content">
+
+		<div class="row">
+
+			<ui:repeat value="#{absenceBean.mesabsences}" var="item">
+
+				<div class="col-xl-4 col-lg-6">
+					<div class="card b">
+						<div class="card-header">
+						
+							<div class="float-right">
+								<div class="badge badge-info">Solde Absence :#{item.user.solde_absence}</div>
+																	<div class="badge badge-info">Solde Congé :#{item.user.solde_conge}</div>
+									
+							</div>
+							<h4 class="m-0">#{item.etat}</h4>
+
+						</div>
+						
+						<div class="card-body"></div>
+						<table class="table">
+							<tbody>
+								<tr>
+									<td><strong>Date Debut</strong></td>
+									<td>#{item.dateDebut}</td>
+								</tr>
+								<tr>
+									<td><strong>Date Fin</strong></td>
+									<td>#{item.dateFin}</td>
+								</tr>
+								<tr>
+									<td><strong>Decision</strong></td>
+									<td>#{item.decision}</td>
+								</tr>
+
+
+							</tbody>
+						</table>
+									<h:form enctype="multipart/form-data">
+						
+						<h:inputFile class="form-control" value="#{absenceBean.file}"
+								type="file"  rendered="#{item.etat eq NULL}" />
+						<h:commandButton class="btn btn-info"
+												value="Justifié" action="#{absenceBean.justifiéClient(item)}" rendered="#{item.etat eq NULL}"  />
+	</h:form>
+	
+					</div>
+				</div>
+
+
+			</ui:repeat>
+
+		</div>
+
+
+	</ui:define>
+</ui:composition>

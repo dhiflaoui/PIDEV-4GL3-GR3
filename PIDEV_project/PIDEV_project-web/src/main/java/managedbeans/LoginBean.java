@@ -8,28 +8,42 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import tn.esprit.PidevService.Impl.EmployeService;
+import tn.esprit.Pidev_Entities.Role;
+import tn.esprit.Pidev_Entities.User;
 
 
-/*@ManagedBean(name="loginBean") 
+
+@ManagedBean(name="loginBean") 
 @SessionScoped
 public class LoginBean implements Serializable {
-	
-	private String login; 
-	private String password; 
-	//private Employe employe; 
+
+	private String cin; 
+	private String motdp; 
+	private static User user; 
+	private User userLoggedIn;
 	private Boolean loggedIn;
 
 	@EJB
-	//EmployeService employeService; 
+	EmployeService employeService; 
 
 	public String doLogin()
 	{
 		String navigateTo = "null"; 
-		//employe = employeService.getEmployeByEmailAndPassword(login, password); 
-
-		/*if (employe != null && employe.getRole() == Role.ADMINISTRATEUR) {
-			navigateTo = "/pages/admin/welcome?faces-redirect=true";
+		 userLoggedIn = employeService.getUserByEmailAndPassword(cin, motdp); 
+		if (userLoggedIn != null && userLoggedIn.getRole() == Role.RH) {
+user = userLoggedIn;
+			navigateTo = "/UsersListe?faces-redirect=true";
+			System.out.println("leeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+user.getNom());
 			loggedIn = true; 
+		}
+		else if (userLoggedIn != null && userLoggedIn.getRole() == Role.INGENIEUR) {
+user = userLoggedIn;
+			navigateTo = "/Mes_Absence?faces-redirect=true";
+			System.out.println("leeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+user.getNom());
+
+			loggedIn = true; 
+			
 		}
 		else 
 		{
@@ -38,25 +52,67 @@ public class LoginBean implements Serializable {
 		return navigateTo; 
 	}
 
+	public User getUserLoggedIn() {
+		return userLoggedIn;
+	}
+
+	public void setUserLoggedIn(User userLoggedIn) {
+		this.userLoggedIn = userLoggedIn;
+	}
+
 	public String doLogout()
 	{
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "/login?faces-redirect=true";
 	}
  
-	public LoginBean() {} 
-	
-	public String getLogin() {return login;}
-	public void setLogin(String login) {this.login = login;}
-	public String getPassword() {return password;}
-	public void setPassword(String password) {this.password = password;}
-	public Employe getEmploye() {return employe;}
-	public void setEmploye(Employe employe) {this.employe = employe;}
-	public Boolean getLoggedIn() {return loggedIn;}
-	public void setLoggedIn(Boolean loggedIn) {this.loggedIn = loggedIn;}
+	public LoginBean() {}
 
+	public String getCin() {
+		return cin;
+	}
+
+	public void setCin(String cin) {
+		this.cin = cin;
+	}
+
+	public String getMotdp() {
+		return motdp;
+	}
+
+	public void setMotdp(String motdp) {
+		this.motdp = motdp;
+	}
+
+	public static User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Boolean getLoggedIn() {
+		return loggedIn;
+	}
+
+	public void setLoggedIn(Boolean loggedIn) {
+		this.loggedIn = loggedIn;
+	}
+
+	public EmployeService getEmployeService() {
+		return employeService;
+	}
+
+	public void setEmployeService(EmployeService employeService) {
+		this.employeService = employeService;
+	}
+
+	
+	
+	
+	
 }
 
 	
 	
-}*/

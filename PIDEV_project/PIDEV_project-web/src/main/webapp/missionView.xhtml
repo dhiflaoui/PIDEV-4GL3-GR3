@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/mobile"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/tempRH/template.xhtml">
+
+	<ui:define name="title">
+		<title>EQUIPE ADVYTEAM</title>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+		</h:form>
+
+
+
+
+		<div class="card card-default">
+			<h:form enctype="multipart/form-data">
+
+				<div class="card-header">EQUIPE ADVYTEAM</div>
+				<div class="card-body">
+					<!-- START table-responsive-->
+
+
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>Mission</th>
+									<th>Date Aller</th>
+									<th>Date Arriver</th>
+									<th>Location</th>
+									<th>Description</th>
+									<th>Type Mission</th>
+									<th>Date Creation</th>
+									<th>Derniere  Modification</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+
+								<ui:repeat value="#{MissionBean.mission}" var="donne">
+									<tr>
+
+
+
+										<td>#{donne.name}</td>
+										<td>#{donne.dateStart}</td>
+										<td>#{donne.dateEnd}</td>
+
+										<td>#{donne.location}</td>
+										<td>#{donne.description}</td>
+										<td>#{donne.specialite}</td>
+										<td>#{donne.created}</td>
+										<td>#{donne.updated}</td>
+
+
+
+										<td>
+											<td><h:commandLink class="fa fa-edit"
+													action="#{MissionBean.update(donne)}" /><br></br>
+													 <h:commandLink
+													 class="fa fa-trash" aria-hidden="true"
+													action="#{MissionBean.removeMission(donne.id)}" /></td>
+
+										</td>
+
+									</tr>
+								</ui:repeat>
+
+							</tbody>
+						</table>
+
+					</div>
+					<!-- END table-responsive-->
+				</div>
+			</h:form>
+
+		</div>
+
+		<div class="card b">
+
+			<div class="card-body">
+				<h:form enctype="multipart/form-data">
+					<label>Mission</label>
+					<h:inputTextarea class="form-control" rows="3"
+						value="#{MissionBean.name}" label="name">
+						<f:validator validatorId="loginValidator" />
+					</h:inputTextarea>
+					<h:messages />
+
+
+
+
+
+					<label>Date Aller</label>
+					<h:inputText class="form-control" type="text"
+						value="#{MissionBean.dateStart}" label="name">
+						<f:validator validatorId="loginValidator" />
+					</h:inputText>
+					<h:messages />
+
+
+
+
+
+					<div class="form-group">
+						<label>Date Arriver</label>
+						<h:inputText class="form-control" type="text"
+							value="#{MissionBean.dateEnd}" label="name">
+							<f:validator validatorId="loginValidator" />
+						</h:inputText>
+						<h:messages />
+
+
+					</div>
+					<div class="form-group">
+						<label>Location</label>
+						<h:inputText class="form-control" type="text"
+							value="#{MissionBean.location}" label="name">
+							<f:validator validatorId="loginValidator" />
+						</h:inputText>
+						<h:messages />
+					</div>
+					<div class="form-group">
+						<label>Description Détaillée</label>
+						<h:inputText class="form-control" type="text"
+							value="#{MissionBean.description}" label="name">
+							<f:validator validatorId="loginValidator" />
+						</h:inputText>
+						<h:messages />
+					</div>
+					<div class="form-group">
+						<label>Specialité Demandé </label>
+						<h:selectOneMenu value="#{MissionBean.specialite}"
+							class="custom-select custom-select-sm"
+							valueChangeListener="#{MissionBean.getEmployeesForSpecialite}"
+							onchange="submit()">
+							<f:selectItem itemLabel="Choisir Role" />
+							<f:selectItems value="#{data.specialites}" />
+
+
+						</h:selectOneMenu>
+					</div>
+
+
+
+					<h:commandLink action="#{MissionBean.updateMissionn()}"
+						class="fa fa-check" aria-hidden="true" />
+
+					<p>
+						<small class="text-muted">* Valider les modifications</small>
+					</p>
+				</h:form>
+			</div>
+		</div>
+
+
+
+
+
+	</ui:define>
+
+
+
+</ui:composition>
