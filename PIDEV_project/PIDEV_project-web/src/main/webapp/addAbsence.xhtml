@@ -5,9 +5,15 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/tempRH/template.xhtml">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+	<script
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"
+		type="text/javascript"></script>
+	<script
+		src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"
+		type="text/javascript"></script>
+	<link
+		href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
+		rel="Stylesheet" type="text/css" />
 	<ui:define name="title">
 		<title>Absence</title>
 	</ui:define>
@@ -28,19 +34,25 @@ Absence
 				<div class="card-body">
 					<h:form enctype="multipart/form-data">
 						<div class="form-group">
-
-
 							<label>Date debut</label>
-							<p:datePicker id="DateDebut" value="#{absenceBean.dateDebut}" />
+
+							<p:datePicker id="startDate" value="#{absenceBean.dateDebut}"  binding="#{startDate}" />
+
 						</div>
 
 
 						<div class="form-group">
 							<label>Date fin</label>
 
-							<p:datePicker id="DateFin" value="#{absenceBean.dateFin}" />
+							<p:datePicker id="endDate" value="#{absenceBean.dateFin}" validatorMessage="la date fin doit être supérieur à la date fin">
+								<f:attribute name="startDateatt" value="#{startDate}"   />
+								<f:validator validatorId="dateValidator" />
+
+							</p:datePicker>
+
 
 						</div>
+<h:message for="endDate" style="color:red" />
 
 
 						<div class="form-group">
@@ -64,22 +76,19 @@ Absence
 						</div>
 						<div class="form-group">
 							<label>Users</label>
-						
-<h:selectOneMenu class="custom-select custom-select-sm" value="#{absenceBean.selectUserById}" >
-		<f:selectItems value="#{absenceBean.users}" 
-			var="user" itemValue="#{user.id}" 
-			itemLabel="#{user.nom}" />
-	</h:selectOneMenu>
+
+							<h:selectOneMenu class="custom-select custom-select-sm"
+								value="#{absenceBean.selectUserById}">
+								<f:selectItems value="#{absenceBean.users}" var="user"
+									itemValue="#{user.id}" itemLabel="#{user.nom}" />
+							</h:selectOneMenu>
 						</div>
 
 
 
 						<h:commandButton class="btn btn-info" value="Postuler"
 							action="#{absenceBean.addAbs()}" />
-						<p>
-							<small class="text-muted">* Integer fermentum accumsan
-								metus, id sagittis ipsum molestie vitae</small>
-						</p>
+
 					</h:form>
 				</div>
 			</div>

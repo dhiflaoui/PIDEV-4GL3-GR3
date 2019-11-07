@@ -24,6 +24,12 @@
 						<div class="user-block-info">
 							<span class="user-block-name">Hello, #{loginBean.userLoggedIn.nom}</span><span
 								class="user-block-role">#{loginBean.userLoggedIn.role}</span>
+								<span
+								class="user-block-role">Votre salaire : #{loginBean.userLoggedIn.salaire} dt</span>
+								<span
+								class="user-block-role">Votre solde congé : #{loginBean.userLoggedIn.solde_conge} </span>
+								<span
+								class="user-block-role">Votre solde absence : #{loginBean.userLoggedIn.solde_absence} </span>
 						</div>
 					</div>
 				</div>
@@ -50,9 +56,9 @@
 				data-toggle="collapse"><em class="icon-layers"></em><span>Congé</span></a>
 				<ul class="sidebar-nav sidebar-subnav collapse" id="layout">
 					<li class="sidebar-subnav-header">Layouts</li>
-					<li class=" "><a href="addAbsence.jsf" title="Horizontal"><span>Demande Congé</span></a></li>
+					<li class=" "><a href="demande-conge.jsf" title="Horizontal"><span>Demande Congé</span></a></li>
 
-					<li class=" "><a href="Liste-abs.jsf"
+					<li class=" "><a href="Mes_Conges.jsf"
 						title="Horizontal"><span>Suivi Congé</span></a></li>
 
 				</ul></li>

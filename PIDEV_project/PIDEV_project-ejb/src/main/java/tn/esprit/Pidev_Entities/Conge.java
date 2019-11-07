@@ -30,7 +30,7 @@ public class Conge implements Serializable{
 	@Temporal(TemporalType.DATE)
 	@Column(name="Conge_Date_Fin")
 	private Date dateFin ;
-	@Column(name="Conge_File") 
+	@Column(name="Conge_File", nullable = true) 
 	String file;
 	@Enumerated(EnumType.STRING)
 	@Column(name="Conge_Type")
@@ -91,6 +91,12 @@ public class Conge implements Serializable{
 		this.type = type;
 		this.etat = etat;
 		this.user = user;
+	}
+	public Conge( Date dateDebut, Date dateFin, Conge_Type type) {
+		super();
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.type = type;
 	}
 	public Conge() {
 		super();

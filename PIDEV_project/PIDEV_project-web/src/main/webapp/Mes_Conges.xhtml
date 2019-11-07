@@ -11,15 +11,14 @@
 
 		<div class="row">
 
-			<ui:repeat value="#{absenceBean.mesabsences}" var="item">
+			<ui:repeat value="#{congeBean.mesconges}" var="item">
 
 				<div class="col-xl-4 col-lg-6">
 					<div class="card b">
 						<div class="card-header">
 						
 							<div class="float-right">
-								<div class="badge badge-info">Solde Absence :#{item.user.solde_absence}</div>
-																	<div class="badge badge-info">Solde Congé :#{item.user.solde_conge}</div>
+								<div class="badge badge-info">Solde :#{item.user.solde_conge}</div>
 									
 							</div>
 							<h4 class="m-0">#{item.etat}</h4>
@@ -38,20 +37,14 @@
 									<td>#{item.dateFin}</td>
 								</tr>
 								<tr>
-									<td><strong>Decision</strong></td>
-									<td>#{item.decision}</td>
+									<td><strong>Type</strong></td>
+									<td>#{item.type}</td>
 								</tr>
 
 
 							</tbody>
 						</table>
-									<h:form enctype="multipart/form-data">
-						
-						<h:inputFile class="form-control" value="#{absenceBean.file}"
-								type="file"  rendered="#{item.etat eq NULL}" />
-						<h:commandButton class="btn btn-info"
-												value="Justifié" action="#{absenceBean.justifiéClient(item)}" rendered="#{item.etat eq NULL}"  />
-	</h:form>
+									
 	
 					</div>
 				</div>

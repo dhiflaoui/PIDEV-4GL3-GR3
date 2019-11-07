@@ -6,6 +6,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
 import tn.esprit.Pidev_Entities.ABS_Etat;
+import tn.esprit.Pidev_Entities.Conge_Type;
 import tn.esprit.Pidev_Entities.Role;
 import tn.esprit.Pidev_Entities.Specialite;
 
@@ -26,6 +27,9 @@ public Specialite[] getSpecialites()
 {
 	return Specialite.values();
 			}
-
+public Conge_Type[] getConge_Type()
+{
+	return Conge_Type.values();
+			}
 }
 
