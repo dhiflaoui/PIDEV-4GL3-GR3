@@ -9,5 +9,6 @@ import tn.esprit.Pidev_Entities.Conge;
 public interface CongeServiceRemote {
 	public void demandeConge(Conge c);
 
+	public void updateConge(Conge e) ;
 
 }

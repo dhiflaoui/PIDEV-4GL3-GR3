@@ -62,10 +62,10 @@ public class User implements Serializable{
 	private Specialite specialite;
 
 	// Relation entre employe et congé
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 	private List<Conge>  conge ;
 	// Relation entre employe et congé
-	@OneToMany(mappedBy="user", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 	private List<Absence>  absence ;
 	// Relation entre employe et evaluation
 	@ManyToMany(mappedBy="Users", cascade = CascadeType.ALL)

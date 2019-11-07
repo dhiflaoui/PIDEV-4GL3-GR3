@@ -11,7 +11,7 @@
 
 	<ui:define name="content">
 		<h:form>
-		<h1 class="text-danger">Liste absence
+		<h1 class="text-danger">Liste Conges
                           
                         </h1>
 		</h:form>
@@ -36,32 +36,30 @@
 									<th>Date Debut</th>
 									<th>Date Fin</th>
 									<th>File</th>
-									<th>Décision</th>
+									<th>Type</th>
 									<th>Etat</th>
 									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
 
-								<ui:repeat value="#{absenceBean.absences}" var="item">
+								<ui:repeat value="#{congeBean.conges}" var="item">
 									<tr>
 
 										<td>#{item.id}</td>
 										<td>#{item.user.nom}</td>
 										<td>#{item.dateDebut}</td>
 										<td>#{item.dateFin}</td>
-			<td><h:commandLink value="Download PDF"
-												action="#{absenceBean.downloadPDF()}" target="_blank" /></td>										<td>#{item.decision}</td>
+<td><h:commandLink value="Download PDF"
+												action="#{congeBean.downloadPDF()}" target="_blank" /></td>													<td>#{item.type}</td>
 										<td>#{item.etat}</td>
 
-										<td><h:commandButton class="btn btn-info"
-												value="Justifié" action="#{absenceBean.justifieAbs(item)}" />
+						<td><h:commandButton class="btn btn-info"
+												value="Accepté" action="#{congeBean.accepte(item)}" />
 												 <h:commandButton
-												class="btn btn-info" value="NonJustifié"
-												action="#{absenceBean.nonJustifieAbs(item)}" />
-												 <h:commandButton
-												class="btn btn-info" value="Supprimer"
-												action="#{absenceBean.removeAbs(item.id)}" /></td>
+												class="btn btn-info" value="Réfusé"
+												action="#{congeBean.refuse(item)}" />
+												</td>
 
 									</tr>
 								</ui:repeat>

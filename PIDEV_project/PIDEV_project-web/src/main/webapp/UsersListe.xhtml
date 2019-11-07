@@ -8,6 +8,7 @@
 
 	<ui:define name="title">
 		<title>EQUIPE ADVYTEAM</title>
+		
 	</ui:define>
 
 	<ui:define name="content">
@@ -39,7 +40,6 @@
 									<th>ville</th>
 									<th>Téléphone</th>
 
-									<th>cv</th>
 									<th>Salaire</th>
 
 									<th>Solde Congé</th>
@@ -68,8 +68,7 @@
 										<td>#{item.ville}</td>
 
 										<td>#{item.tel}</td>
-										<td><h:commandLink value="Download PDF"
-												action="#{userBean.downloadPDF()}" target="_blank" /></td>
+							
 
 
 										<td>#{item.salaire}</td>

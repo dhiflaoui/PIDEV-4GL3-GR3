@@ -11,13 +11,10 @@
 
 	<ui:define name="content">
 		<h:form>
-		Ajouter Un Compte
-		
+			<h1 class="text-danger">Ajouter Un Compte</h1>
+
+
 		</h:form>
-
-
-
-
 
 		<div class="col-md-6">
 			<!-- START card-->
@@ -28,30 +25,44 @@
 						<div class="form-group">
 
 							<label>Cin</label>
-							<h:message for="validationCin" style="color:green" />
 							<h:inputText class="form-control" rows="3"
-								value="#{userBean.cin}" id="validationCin" required="true"
+								value="#{userBean.cin}" id="validationCin" size="8"
+								required="true"
 								requiredMessage="le champs cin contient 8 chiffre">
-								<f:validateLength maximum="8" minimum="8" />
+								<f:validateRegex pattern="[0-9]{8}" for="validatePrenom" />
 							</h:inputText>
+
+
 						</div>
+						<h:message for="validationCin" style="color:green" />
 
 
 						<div class="form-group">
 							<label>Nom</label>
-							<h:inputText class="form-control" type="text"
+
+							<h:inputText class="form-control" type="text" required="true"
+								id="validationNom" maxlength="25"
+								requiredMessage="S'il vous plait entrer le nom de l'employe"
+								validatorMessage="le nom au maximum 25 caracteres"
 								value="#{userBean.nom}" />
+
 						</div>
+						<h:message for="validationNom" />
 
 						<div class="form-group">
 							<label>Prenom</label>
-							<h:inputText class="form-control" type="text"
+
+							<h:inputText class="form-control" type="text" required="true"
+								id="validationPrenom" maxlength="25"
+								requiredMessage="S'il vous plait entrer le prenom de l'employe"
+								validatorMessage="le nom au maximum 25 caracteres"
 								value="#{userBean.prenom}" />
 						</div>
+						<h:message for="validationPrenom" />
+
 						<div class="form-group">
 
 							<label>Email</label>
-							<h:message for="validationMail" style="color:green" />
 							<h:inputText class="form-control" type="text"
 								value="#{userBean.adresseMail}" id="validationMail"
 								required="true"
@@ -59,6 +70,8 @@
 								<f:validateRegex pattern=".+\@.+\..+" />
 							</h:inputText>
 						</div>
+						<h:message for="validationMail" style="color:green" />
+
 						<div class="form-group">
 							<label>Password</label>
 							<h:inputText class="form-control" type="text"
@@ -88,19 +101,48 @@
 						</div>
 						<div class="form-group">
 							<label>Solde Congé</label>
+
 							<h:inputText class="form-control" type="text"
-								value="#{userBean.solde_conge}" />
+								id="validationSoldeC" required="true"
+								validatorMessage="le salaire doit entre 30 et 60"
+								requiredMessage="Le solde ne doit pas etre Null"
+								value="#{userBean.solde_conge}">
+								<f:validateDoubleRange minimum="30" maximum="60"
+									for="validationSoldeC" />
+
+							</h:inputText>
 						</div>
+						<h:message for="validationSoldeC" />
+
 						<div class="form-group">
 							<label>Solde Absence</label>
-							<h:inputText class="form-control" type="text"
-								value="#{userBean.solde_absence}" />
+							<h:inputText id="validationSoldeA" required="true"
+								class="form-control" type="text"
+								validatorMessage="le salaire doit entre 30 et 60"
+								requiredMessage="Le solde ne doit pas etre Null"
+								value="#{userBean.solde_absence}">
+								<f:validateDoubleRange minimum="30" maximum="60"
+									for="validationSoldeA" />
+							</h:inputText>
 						</div>
+						<h:message for="validationSoldeA" />
+
 						<div class="form-group">
 							<label>Salaire</label>
+
 							<h:inputText class="form-control" type="text"
-								value="#{userBean.salaire}" />
+								value="#{userBean.salaire}"
+								validatorMessage="le salaire doit entre 500 et 10000"
+								requiredMessage="Le Salaire ne doit pas etre Null"
+								id="validationSalaire" required="true">
+								<f:validateDoubleRange minimum="500" maximum="10000"
+									for="validationSalaire" />
+
+							</h:inputText>
+
 						</div>
+						<h:message for="validationSalaire" />
+
 						<div class="form-group">
 							<label>Role</label>
 							<h:selectOneMenu class="custom-select custom-select-sm"
