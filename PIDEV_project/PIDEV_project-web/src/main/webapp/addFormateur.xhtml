@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="title">
+		<title>INDEX</title>
+	</ui:define>
+
+	<ui:define name="content">
+
+
+
+
+
+		<div class="col-md-6">
+			<!-- START card-->
+			<div class="card ">
+				<h1 class="text-warning">Formulaire Ajout Formateur</h1>
+
+				<div class="card-body">
+					<h:form class="form-horizontal">
+
+						<div class="form-group">
+							<label>Nom</label>
+							<h:inputText class="form-control" type="text" id="validateNom"
+								value="#{formateurBean.nom}" required="true"
+								requiredMessage="Entrez le nom"
+								validatorMessage="le nom doit etre entre 5 et 25 caractere">
+								<f:validateLength minimum="3" maximum="25" for="validateNom" />
+							</h:inputText>
+							<h:message for="validateNom" style="color:red" />
+							
+						</div>
+
+						<div class="form-group">
+							<label>Prenom</label>
+							<h:inputText class="form-control" type="text" id="validatePrenom"
+								equired="true" requiredMessage="Entrez le Prenom"
+								validatorMessage="le Prenom doit etre entre 5 et 25 caractere"
+								value="#{formateurBean.prenom}">
+								<f:validateLength minimum="5" maximum="25" for="validatePrenom" />
+							</h:inputText>
+							<h:message for="validatePrenom" style="color:red" />
+
+						</div>
+						<div class="form-group">
+							<label>Email</label>
+							<h:inputText class="form-control" type="text" id="validateEmail"
+								equired="true" requiredMessage="Entrez le Email"
+								validatorMessage="le Email doit etre comme +++@++.++"
+								value="#{formateurBean.email}">
+								<f:validateRegex pattern=".+\@.+\..+" />
+							</h:inputText>
+							<h:message for="validateEmail" style="color:red" />
+
+						</div>
+						<div class="form-group">
+							<label>Numero</label>
+							<h:inputText class="form-control" type="text" id="validateNumero"
+								size="8" equired="true" requiredMessage="Entrez le Numero"
+								validatorMessage="le Numero doit etre 8 chiffre"
+								value="#{formateurBean.numero}">
+								<f:validateRegex pattern="[0-9]{8}" for="validatePrenom" />
+							</h:inputText>
+							<h:message for="validateNumero" style="color:red" />
+
+						</div>
+						<div class="form-group">
+							<label>Specialite</label>
+							<h:selectOneMenu class="custom-select custom-select-sm"
+								value="#{formateurBean.specialite}">
+								<f:selectItem itemLabel="Choisir" />
+								<f:selectItems value="#{specilite.specialites}" />
+							</h:selectOneMenu>
+						</div>
+						<div class="form-group">
+							<label>Disponibilite</label>
+							<h:selectOneMenu class="custom-select custom-select-sm"
+								value="#{formateurBean.disponible}">
+								<f:selectItem itemLabel="Choisir " />
+								<f:selectItems value="#{specilite.disp}" />
+							</h:selectOneMenu>
+						</div>
+
+
+
+
+
+						<h:commandButton class="mb-sm btn btn-success" value="Ajouter"
+							action="#{formateurBean.ajouterFormateur()}" />
+						<p>
+							<small class="text-muted">* Integer fermentum accumsan
+								metus, id sagittis ipsum molestie vitae</small>
+						</p>
+					</h:form>
+				</div>
+
+
+
+			</div>
+		</div>
+
+
+
+
+	</ui:define>
+
+
+</ui:composition>

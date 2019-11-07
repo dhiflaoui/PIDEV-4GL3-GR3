@@ -1,25 +1,38 @@
 package tn.esprit.Pidev_Entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 
+
+@Entity
 public class Formateur implements Serializable {
 
 	
-	private static long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	@Column(name="Id_Formateur")
-	private int Id ;
+	private int id ;
 	
+	
+
+	
+
 	@Column(name="Nom")
 	private String nom ;
 	
@@ -27,15 +40,30 @@ public class Formateur implements Serializable {
 	private String prenom ;
 	
 	 
-	@Column(name="Email" , unique=true)
+	@Column(name="Email" )
 	private String email ;
 	
 	@Column(name="Numero")
 	private String numero;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name="Disponible")
-	private Boolean disponible;
+	private Disponible dis;
 	
+	@OneToMany(mappedBy = "formateur")
+	private List<Formation> formations;
+	
+	public List<Formation> getFormations() {
+		return formations;
+	}
+
+
+
+
+	public void setFormations(List<Formation> formations) {
+		this.formations = formations;
+	}
+
 	@Enumerated(EnumType.STRING)
 	@Column(name="Specialite")
 	private Specialite specialite ;
@@ -44,16 +72,15 @@ public class Formateur implements Serializable {
 		return serialVersionUID;
 	}
 
-	public static void setSerialversionuid(long serialversionuid) {
-		serialVersionUID = serialversionuid;
-	}
+	
+
 
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getNom() {
@@ -88,12 +115,12 @@ public class Formateur implements Serializable {
 		this.numero = numero;
 	}
 
-	public Boolean getDisponible() {
-		return disponible;
+	public Disponible getDis() {
+		return dis;
 	}
 
-	public void setDisponible(Boolean disponible) {
-		this.disponible = disponible;
+	public void setDis(Disponible dis) {
+		this.dis = dis;
 	}
 
 	public Specialite getSpecialite() {
@@ -104,27 +131,47 @@ public class Formateur implements Serializable {
 		this.specialite = specialite;
 	}
 
-	public Formateur(int id, String nom, String prenom, String email, String numero, Boolean disponible,
-			Specialite specialite) {
-		super();
-		Id = id;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.numero = numero;
-		this.disponible = disponible;
-		this.specialite = specialite;
-	}
+
+	
 
 	public Formateur() {
 		
 	}
 
+	
+
+	public Formateur(int id, String nom, String prenom, String email, String numero, Disponible dis,
+			 Specialite specialite) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.numero = numero;
+		this.dis = dis;
+		this.specialite = specialite;
+	}
+
+
+
+
+	public Formateur(String nom, String prenom, String email, String numero, Disponible dis,
+			Specialite specialite) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.numero = numero;
+		this.dis = dis;
+		this.specialite = specialite;
+	}
+
 	@Override
 	public String toString() {
-		return "Formateur [Id=" + Id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", numero=" + numero
-				+ ", disponible=" + disponible + ", specialite=" + specialite + "]";
+		return "Formateur [Id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", numero=" + numero
+				+ ", disponible=" + dis + ", formations=" + formations + ", specialite=" + specialite + "]";
 	}
+
 	
 	
 }

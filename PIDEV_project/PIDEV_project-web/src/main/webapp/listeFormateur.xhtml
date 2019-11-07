@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="title">
+		<title>Les formateurs</title>
+	</ui:define>
+
+	<ui:define name="content">
+
+
+
+
+		<div class="card card-default">
+			<h:form enctype="multipart/form-data">
+
+				<h1 class="text-warning">
+						LES FORMATEURS 
+					</h1>
+				<div class="card-body">
+					<!-- START table-responsive-->
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+
+									<th>Nom</th>
+									<th>Prenom</th>
+									<th>Email</th>
+									<th>Numero</th>
+									<th>Disponible</th>
+									<th>Specialite</th>
+
+								</tr>
+							</thead>
+							<tbody>
+
+								<ui:repeat value="#{formateurBean.employes}" var="item">
+									<tr>
+										<td>#{item.nom}</td>
+										<td>#{item.prenom}</td>
+										<td>#{item.email}</td>
+										<td>#{item.numero}</td>
+										<td>#{item.dis}</td>
+										<td>#{item.specialite}</td>
+										<td><h:commandButton class="mb-sm btn btn-danger"
+												value="Supprimer"
+												action="#{formateurBean.removeFormateur(item.id)}" /> 
+												<h:commandButton
+												class="mb-sm btn btn-info" value="Modifier"
+												action="#{formateurBean.modifier(item)}" /></td>
+
+
+									</tr>
+								</ui:repeat>
+
+							</tbody>
+						</table>
+					</div>
+					<!-- END table-responsive-->
+				</div>
+			</h:form>
+		</div>
+
+
+		<div class="card-body">
+			<h:form enctype="multipart/form-data">
+
+
+<div class="form-group">
+					<h:inputHidden value="#{formateurBean.formateurIdToBeUpdated}"
+					
+						/>
+				</div>
+				
+				
+				
+				<div class="form-group">
+					<label>Nom</label>
+					<h:inputText class="form-control" type="text"
+						value="#{formateurBean.nom}" />
+				</div>
+
+				<div class="form-group">
+					<label>Prenom</label>
+					<h:inputText class="form-control" type="text"
+						value="#{formateurBean.prenom}" />
+				</div>
+				<div class="form-group">
+					<label>numero</label>
+					<h:inputText class="form-control" type="text"
+						value="#{formateurBean.numero}" />
+				</div>
+				<div class="form-group">
+					<label>Email</label>
+					<h:inputText class="form-control" type="text"
+						value="#{formateurBean.email}" />
+				</div>
+
+				<div class="form-group">
+								<label>Disponibilite</label>
+								<h:selectOneMenu class="custom-select custom-select-sm"
+									value="#{formateurBean.disponible}">
+									<f:selectItem itemLabel="Choisir " />
+									<f:selectItems value="#{specilite.disp}" />
+								</h:selectOneMenu>
+							</div>
+							
+				<div class="form-group">
+					<label>specialite</label>
+					<h:selectOneMenu class="form-control"
+						value="#{formateurBean.specialite}">
+						<f:selectItem itemLabel="Choisir specilite" />
+						<f:selectItems value="#{specilite.specialites}" />
+					</h:selectOneMenu>
+				</div>
+				<h:commandButton class="btn btn-oval btn-success" action="#{formateurBean.mettreAjourEmploye()}"
+					value="Confirmer" />
+				<p>
+					<small class="text-muted">* Integer fermentum accumsan
+						metus, id sagittis ipsum molestie vitae</small>
+				</p>
+			</h:form>
+		</div>
+
+	</ui:define>
+
+
+</ui:composition>

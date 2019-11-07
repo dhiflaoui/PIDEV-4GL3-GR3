@@ -19,6 +19,10 @@ import javax.persistence.TemporalType;
 @Entity 
 @Table(name="T_ABSENCE") 
 public class Absence implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id 
 	@GeneratedValue( strategy= GenerationType.IDENTITY) 
 	@Column(name="Absence_ID") 
