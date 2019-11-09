@@ -9,7 +9,8 @@ import tn.esprit.Pidev_Entities.*;
 
 @Remote
 public interface ProjectServiceRemote {
-	public int AddProject(Project project,User user);
+	public int AddProject(Project project);
+	public void removeProject(Project project);
 	public Project getProjectById(int id);
 	public List<Project> getProjectByOwner(User user);
 	public List<Project> getAllProjects();

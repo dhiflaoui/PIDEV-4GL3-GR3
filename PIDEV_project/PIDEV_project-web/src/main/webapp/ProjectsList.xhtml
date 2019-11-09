@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/mobile"
+	template="/WEB-INF/tempRH/template.xhtml">
+
+	<ui:define name="title">
+		<title>Projects</title>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+		</h:form>
+
+
+
+
+		<div class="card card-default">
+			<h:form enctype="multipart/form-data">
+
+				<div class="card-header">My projects</div>
+				<div class="card-body">
+					<!-- START table-responsive-->
+
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>ID</th>
+
+									<th>Title</th>
+									<th>Client</th>
+									<th>Budget</th>
+									<th>Description</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<ui:repeat value="#{projectBean.myProjects}" var="item">
+									<tr>
+										
+
+
+										<td>#{item.id}</td>
+										<td>#{item.title}</td>
+										<td>#{item.clientName}</td>
+
+										<td>#{item.budget}</td>
+										<td>#{item.description}</td>
+
+										<td><h:commandButton class="btn btn-info"
+												value="Modifier" action="#{projectBean.modify(item)}" /> <h:commandButton
+												class="btn btn-info" value="Supprimer"
+												action="#{projectBean.remove(item)}" /></td>
+
+									</tr>
+								</ui:repeat>
+
+							</tbody>
+						</table>
+
+					</div>
+					
+				</div>
+			</h:form>
+
+		</div>
+
+		<div class="card b">
+
+			<div class="card-body">
+				<h:form enctype="multipart/form-data">
+					<div class="form-group">
+						<label>Title</label>
+						<h:inputText class="form-control" type="text"
+							value="#{projectBean.title}" />
+					</div>
+
+
+
+					<div class="form-group">
+						<label>Client</label>
+						<h:inputText class="form-control" type="text"
+							value="#{projectBean.clientName}" />
+					</div>
+
+					<div class="form-group">
+						<label>Budget</label>
+						<h:inputText class="form-control" type="text"
+							value="#{projectBean.budget}" />
+					</div>
+					
+					<div class="form-group">
+						<label>Description</label>
+						<h:inputText class="form-control" type="text"
+							value="#{projectBean.description}" />
+					</div>
+					
+				
+					<h:commandButton action="#{projectBean.updateProject()}"
+						value="Update Project" />
+
+					<p>
+						<small class="text-muted">* How to update the project easily </small>
+					</p>
+				</h:form>
+			</div>
+		</div>
+
+
+
+
+
+
+
+	</ui:define>
+
+
+</ui:composition>

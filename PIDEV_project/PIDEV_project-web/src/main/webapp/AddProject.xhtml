@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/mobile"
+	template="/WEB-INF/tempRH/template.xhtml">
+
+	<ui:define name="title">
+		<title>EQUIPE ADVYTEAM</title>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+		</h:form>
+
+		<div class="card b">
+
+			<div class="card-body">
+				<h:form enctype="multipart/form-data">
+		
+					<div class="form-group">
+						<label>Title</label>
+						<h:inputText class="form-control" type="text"
+							value="#{projectBean.title}" />
+					</div>
+
+					<div class="form-group">
+						<label>Budget</label>
+						<h:inputText class="form-control" type="text"
+							value="#{projectBean.budget}" />
+					</div>
+				
+					<div class="form-group">
+						<label>Client</label>
+						<h:inputText class="form-control" type="text"
+							value="#{projectBean.clientName}" />
+					</div>
+					
+					<div class="form-group">
+						<label>Description</label>
+						<h:inputText class="form-control" type="text"
+							value="#{projectBean.description}" />
+					</div>
+					
+					
+
+					<h:commandButton action="#{projectBean.addProject()}"
+						value="Add new project" />
+
+					<p>
+						<small class="text-muted">* How to add a new project easily </small>
+					</p>
+				</h:form>
+			</div>
+		</div>
+
+
+
+
+
+
+
+	</ui:define>
+
+
+</ui:composition>

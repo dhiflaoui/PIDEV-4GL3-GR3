@@ -20,12 +20,10 @@ public class ProjectService implements ProjectServiceRemote ,ProjectServiceLocal
 	EntityManager em;
 	
 	
-	public int AddProject(Project project,User user)
+	public int AddProject(Project project)
 	{	
-		project.setOwnedBy(user);
-		user.getOwnerOF().add(project);
+		
 		em.persist(project);
-		em.merge(user);
  		return project.getId();
 	}
 //----------------------------------------------------------------------------	
@@ -89,6 +87,12 @@ public class ProjectService implements ProjectServiceRemote ,ProjectServiceLocal
 			user.setMemberOf(null);;
 			em.merge(user);
 		}
+	}
+
+
+	@Override
+	public void removeProject(Project project) {
+		em.remove(project);
 	}
 
 }

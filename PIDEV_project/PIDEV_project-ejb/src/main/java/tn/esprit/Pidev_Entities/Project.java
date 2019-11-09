@@ -27,7 +27,12 @@ public class Project implements Serializable {
 	
 	private String clientName;
 	
-	private int Budget;
+	private String title;
+	
+	private String description;
+	
+	
+	private int budget;
 	
 	@Enumerated(EnumType.STRING)
 	private State state ;
@@ -45,57 +50,164 @@ public class Project implements Serializable {
 	public Project() {
 		super();
 	}
+	
+	
+	
+	
+	
+	
+	public Project(int id, String clientName, String title, String description, int budget) {
+		super();
+		this.id = id;
+		this.clientName = clientName;
+		this.title = title;
+		this.description = description;
+		this.budget = budget;
+	}
 
-	public Project(String clientName, int budget, State state) {
+
+
+
+
+
+	public Project(String clientName, String title, int budget) {
 		super();
 		this.clientName = clientName;
-		Budget = budget;
+		this.title = title;
+		this.budget = budget;
+	}
+
+
+
+
+	public Project(String clientName, String title, String description, int budget) {
+		super();
+		this.clientName = clientName;
+		this.title = title;
+		this.description = description;
+		this.budget = budget;
+	}
+
+
+
+
+	public Project(String clientName, String title, String description, int budget, State state) {
+		super();
+		this.clientName = clientName;
+		this.title = title;
+		this.description = description;
+		this.budget = budget;
 		this.state = state;
 	}
 
-	public Project(String clientName, int budget, State state, User ownedBy) {
+	
+
+	public Project(String clientName, String title, String description, int budget, State state, User ownedBy,
+			List<Task> tasks, List<Bug> bugs) {
 		super();
 		this.clientName = clientName;
-		Budget = budget;
+		this.title = title;
+		this.description = description;
+		this.budget = budget;
 		this.state = state;
 		this.ownedBy = ownedBy;
+		this.tasks = tasks;
+		this.bugs = bugs;
 	}
+
+
+
 
 	public int getId() {
 		return id;
 	}
 
+
+
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
+
+
 
 	public String getClientName() {
 		return clientName;
 	}
 
+
+
+
 	public void setClientName(String clientName) {
 		this.clientName = clientName;
 	}
 
-	public int getBudget() {
-		return Budget;
+
+
+
+	public String getTitle() {
+		return title;
 	}
 
-	public void setBudget(int budget) {
-		Budget = budget;
+
+
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
+
+
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+
+
+	public int getBudget() {
+		return budget;
+	}
+
+
+
+
+	public void setBudget(int budget) {
+		this.budget = budget;
+	}
+
+
+
 
 	public State getState() {
 		return state;
 	}
 
+
+
+
 	public void setState(State state) {
 		this.state = state;
 	}
 
+
+
+
 	public User getOwnedBy() {
 		return ownedBy;
 	}
+
+
+
 
 	public void setOwnedBy(User ownedBy) {
 		this.ownedBy = ownedBy;
@@ -105,8 +217,18 @@ public class Project implements Serializable {
 		return tasks;
 	}
 
+
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
 	}
-		
+
+	public List<Bug> getBugs() {
+		return bugs;
+	}
+
+
+	public void setBugs(List<Bug> bugs) {
+		this.bugs = bugs;
+	}
+
 }
