@@ -13,14 +13,11 @@
 	<ui:define name="content">
 		<h:form>
 		</h:form>
-
-
-
-
+		
 		<div class="card card-default">
 			<h:form enctype="multipart/form-data">
 
-				<div class="card-header">My projects</div>
+				<div class="card-header">List of all pending projects</div>
 				<div class="card-body">
 					<!-- START table-responsive-->
 
@@ -34,13 +31,13 @@
 									<th>Client</th>
 									<th>Budget</th>
 									<th>Description</th>
-									<th>State</th>
+									
 									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
 
-								<ui:repeat value="#{projectBean.projects}" var="item">
+								<ui:repeat value="#{projectBean.pendingProjects}" var="item">
 									<tr>
 										
 
@@ -51,10 +48,9 @@
 
 										<td>#{item.budget}</td>
 										<td>#{item.description}</td>
-										<td>#{item.state}</td>
-										
-
 										<td>
+										<h:commandButton class="btn btn-info"
+												value="Manage" action="#{projectBean.manage(item)}" />
 										<h:commandButton class="btn btn-info"
 												value="Modifier" action="#{projectBean.modify(item)}" /> <h:commandButton
 												class="btn btn-info" value="Supprimer"

@@ -29,11 +29,7 @@ public class Assignment implements Serializable {
 	private String title;
 	private String description;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date startedAt;
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date finishedAt;
+	private int finishedIn;
 	
 	@ManyToOne
 	@JoinColumn(name="idEmployee", referencedColumnName="UT_ID", insertable=false , updatable=false)
@@ -46,33 +42,42 @@ public class Assignment implements Serializable {
 	
 	
 
-	public Assignment() {
-		super();
-	}
-	
-	
-
-	public Assignment(String title, String description, Date startedAt, Date finishedAt) {
+	public Assignment(String title, String description, int finishedIn, User emp, Task task) {
 		super();
 		this.title = title;
 		this.description = description;
-		this.startedAt = startedAt;
-		this.finishedAt = finishedAt;
-	}
-
-	
-
-
-	public Assignment(String title, String description, Date startedAt, Date finishedAt, User emp, Task task) {
-		super();
-		this.title = title;
-		this.description = description;
-		this.startedAt = startedAt;
-		this.finishedAt = finishedAt;
+		this.finishedIn = finishedIn;
 		this.emp = emp;
 		this.task = task;
 	}
 
+
+
+	public Assignment(String title, String description, int finishedIn) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.finishedIn = finishedIn;
+	}
+
+
+
+	public int getFinishedIn() {
+		return finishedIn;
+	}
+
+
+
+	public void setFinishedIn(int finishedIn) {
+		this.finishedIn = finishedIn;
+	}
+
+
+
+	public Assignment() {
+		super();
+	}
+	
 
 
 	public int getId() {
@@ -99,22 +104,7 @@ public class Assignment implements Serializable {
 		this.description = description;
 	}
 
-	public Date getStartedAt() {
-		return startedAt;
-	}
-
-	public void setStartedAt(Date startedAt) {
-		this.startedAt = startedAt;
-	}
-
-	public Date getFinishedAt() {
-		return finishedAt;
-	}
-
-	public void setFinishedAt(Date finishedAt) {
-		this.finishedAt = finishedAt;
-	}
-
+	
 	public User getEmp() {
 		return emp;
 	}

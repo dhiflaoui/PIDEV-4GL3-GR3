@@ -22,24 +22,82 @@ public class ProjectBean implements Serializable {
 	private String title;
 	private String description;
 	private List<Project> projects;
+	private List<Project> pendingProjects;
+	private List<Project> onGoingProjects;
+	private List<Project> finishedProjects;
+	
 	private int projectIdToUpdate;
+	private int projectIdToManage;
 	
-	
+	public int getProjectIdToManage() {
+		return projectIdToManage;
+	}
+
+
+	public void setProjectIdToManage(int projectIdToManage) {
+		this.projectIdToManage = projectIdToManage;
+	}
+
+
+	public List<Project> getFinishedProjects() {
+		finishedProjects = ps.getFinishedProjects();
+		return finishedProjects;
+	}
+
+
+	public void setFinishedProjects(List<Project> finishedProjects) {
+		this.finishedProjects = finishedProjects;
+	}
+
+
+	public List<Project> getPendingProjects() {
+		pendingProjects = ps.getPendingProjects();
+		return pendingProjects;
+	}
+
+
+	public void setPendingProjects(List<Project> pendingProjects) {
+		this.pendingProjects = pendingProjects;
+	}
+
+
+	public List<Project> getOnGoingProjects() {
+		onGoingProjects = ps.getOnGoingProjects();
+		return onGoingProjects;
+	}
+
+
+	public void setOnGoingProjects(List<Project> onGoingProjects) {
+		this.onGoingProjects = onGoingProjects;
+	}
+
 
 	@EJB
 	ProjectService ps ; 
 
 	public String addProject() {
 		System.out.println("test");
-		int a = ps.AddProject(new Project(clientName,title,description,budget));
+		int a = ps.AddProject(new Project(clientName,title,description,budget,State.Pending));
 		System.out.println(a);
 		return "new-project-added?faces-redirect=true";
 	}
+
 	
 	
-	public String remove(Project project) {
-		ps.removeProject(project);
-		return "new-project-added?faces-redirect=true";
+	public String remove(Project p) {
+		ps.removeProject(p.getId());
+		return "Project-Updated?faces-redirect=true";
+	}
+	
+	
+	public String finish(Project p) {
+		ps.finishProject(p.getId());
+		return "Project-Updated?faces-redirect=true";
+	}
+	
+	public String manage(Project p) {
+		this.setProjectIdToManage(p.getId());
+		return "ProjectTasksList?faces-redirect=true";
 	}
 	
 	public void modify(Project project) {
@@ -131,9 +189,5 @@ public class ProjectBean implements Serializable {
 		this.projectIdToUpdate = projectIdToUpdate;
 	}
 	
-	
-	
-	
-
 
 }

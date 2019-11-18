@@ -91,8 +91,61 @@ public class ProjectService implements ProjectServiceRemote ,ProjectServiceLocal
 
 
 	@Override
-	public void removeProject(Project project) {
-		em.remove(project);
+	public void removeProject(int pid) {
+		Project p = em.find(Project.class,pid);
+		em.remove(p);
+	}
+	
+	
+	public void finishProject(int pid) {
+		Project p = em.find(Project.class,pid);
+		p.setState(State.Finished);
+		em.merge(p);
+	}
+
+
+	@Override
+	public List<Project> getPendingProjects() {
+		TypedQuery<Project> query = em.createQuery("select p from Project p where p.state=:state", Project.class);
+		query.setParameter("state", State.Pending);
+		List<Project> projects = null;
+		try { projects = query.getResultList(); }
+		catch (Exception
+
+		e) { System.out.println("Erreur : " +
+		e); }
+
+		return projects;
+	}
+
+
+	@Override
+	public List<Project> getOnGoingProjects() {
+		TypedQuery<Project> query = em.createQuery("select p from Project p where p.state=:state", Project.class);
+		query.setParameter("state", State.Ongoing);
+		List<Project> projects = null;
+		try { projects = query.getResultList(); }
+		catch (Exception
+
+		e) { System.out.println("Erreur : " +
+		e); }
+
+		return projects;
+	}
+	
+	
+	@Override
+	public List<Project> getFinishedProjects() {
+		TypedQuery<Project> query = em.createQuery("select p from Project p where p.state=:state", Project.class);
+		query.setParameter("state", State.Finished);
+		List<Project> projects = null;
+		try { projects = query.getResultList(); }
+		catch (Exception
+
+		e) { System.out.println("Erreur : " +
+		e); }
+
+		return projects;
 	}
 
 }

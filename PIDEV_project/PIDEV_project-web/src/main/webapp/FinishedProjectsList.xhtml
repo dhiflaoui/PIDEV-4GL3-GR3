@@ -20,7 +20,7 @@
 		<div class="card card-default">
 			<h:form enctype="multipart/form-data">
 
-				<div class="card-header">My projects</div>
+				<div class="card-header">List of all finished projects</div>
 				<div class="card-body">
 					<!-- START table-responsive-->
 
@@ -34,13 +34,13 @@
 									<th>Client</th>
 									<th>Budget</th>
 									<th>Description</th>
-									<th>State</th>
+									
 									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
 
-								<ui:repeat value="#{projectBean.projects}" var="item">
+								<ui:repeat value="#{projectBean.finishedProjects}" var="item">
 									<tr>
 										
 
@@ -51,16 +51,11 @@
 
 										<td>#{item.budget}</td>
 										<td>#{item.description}</td>
-										<td>#{item.state}</td>
-										
-
 										<td>
-										<h:commandButton class="btn btn-info"
-												value="Modifier" action="#{projectBean.modify(item)}" /> <h:commandButton
+										<h:commandButton
 												class="btn btn-info" value="Supprimer"
 												action="#{projectBean.remove(item)}" />
-												<h:commandButton class="btn btn-info"
-												value="Close" action="#{projectBean.finish(item)}" /></td>
+												</td>
 
 									</tr>
 								</ui:repeat>
@@ -74,52 +69,6 @@
 			</h:form>
 
 		</div>
-
-		<div class="card b">
-
-			<div class="card-body">
-				<h:form enctype="multipart/form-data">
-					<div class="form-group">
-						<label>Title</label>
-						<h:inputText class="form-control" type="text"
-							value="#{projectBean.title}" />
-					</div>
-
-
-
-					<div class="form-group">
-						<label>Client</label>
-						<h:inputText class="form-control" type="text"
-							value="#{projectBean.clientName}" />
-					</div>
-
-					<div class="form-group">
-						<label>Budget</label>
-						<h:inputText class="form-control" type="text"
-							value="#{projectBean.budget}" />
-					</div>
-					
-					<div class="form-group">
-						<label>Description</label>
-						<h:inputText class="form-control" type="text"
-							value="#{projectBean.description}" />
-					</div>
-					
-				
-					<h:commandButton action="#{projectBean.updateProject()}"
-						value="Update Project" />
-
-					<p>
-						<small class="text-muted">* How to update the project easily </small>
-					</p>
-				</h:form>
-			</div>
-		</div>
-
-
-
-
-
 
 
 	</ui:define>

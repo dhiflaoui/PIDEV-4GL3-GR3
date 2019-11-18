@@ -39,8 +39,7 @@ public class Task implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private State state;
 	
-	@Temporal(TemporalType.TIME)
-	private Date duration ;
+	private int duration ;
 	
 	
 	@ManyToOne
@@ -52,36 +51,18 @@ public class Task implements Serializable {
 	
 	
 	
+	public Task(String title, String description, Specialite spec, State state, int duration) {
+		super();
+		Title = title;
+		Description = description;
+		this.spec = spec;
+		this.state = state;
+		this.duration = duration;
+	}
+
 	public Task() {
 		super();
 	}
-
-	public Task(String title, String description, Specialite spec, State state, Date duration) {
-		super();
-		Title = title;
-		Description = description;
-		this.spec = spec;
-		this.state = state;
-		this.duration = duration;
-	}
-	
-	
-	
-
-	public Task(String title, String description, Specialite spec, State state, Date duration, Project project,
-			Assignment assignment) {
-		super();
-		Title = title;
-		Description = description;
-		this.spec = spec;
-		this.state = state;
-		this.duration = duration;
-		this.project = project;
-		this.assignment = assignment;
-	}
-
-
-
 
 	public int getId() {
 		return id;
@@ -123,13 +104,6 @@ public class Task implements Serializable {
 		this.state = state;
 	}
 
-	public Date getDuration() {
-		return duration;
-	}
-
-	public void setDuration(Date duration) {
-		this.duration = duration;
-	}
 
 	public Project getProject() {
 		return project;
@@ -146,7 +120,15 @@ public class Task implements Serializable {
 	public void setAssignment(Assignment assignment) {
 		this.assignment = assignment;
 	}
-	
-	
 
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+	
+	
+	
 }
