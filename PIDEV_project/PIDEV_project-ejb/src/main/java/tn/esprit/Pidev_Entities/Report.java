@@ -12,9 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
+@XmlRootElement
+
 public class Report   implements Serializable {
 
 	private static final long serialVersionUID = 35501844688441792L;
@@ -32,7 +35,7 @@ public class Report   implements Serializable {
 	private String Image;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_mission", nullable = true, insertable = false, updatable = false)
+	@JoinColumn( nullable = true, insertable = false, updatable = false)
 	private Mission id_M;
 
 	public Report(Long id, String name, long price, String description, ReportNature nature, ReportState state,

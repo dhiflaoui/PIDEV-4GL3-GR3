@@ -15,28 +15,30 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity 
-@Table(name="T_CONGE") 
+@XmlRootElement
+
 public class Conge implements Serializable{
 	
 	@Id 
 	@GeneratedValue( strategy= GenerationType.IDENTITY) 
-	@Column(name="Conge_ID") 
+	@Column
 	int id; 
 	@Temporal(TemporalType.DATE)
-	@Column(name="Conge_Date_Debut")
+	@Column
 	private Date dateDebut ;
 	@Temporal(TemporalType.DATE)
-	@Column(name="Conge_Date_Fin")
+	@Column
 	private Date dateFin ;
-	@Column(name="Conge_File", nullable = true) 
+	@Column( nullable = true) 
 	String file;
 	@Enumerated(EnumType.STRING)
-	@Column(name="Conge_Type")
+	@Column
 	private Conge_Type type; 
 	@Enumerated(EnumType.STRING)
-	@Column(name="Conge_Etat")
+	@Column
 	private Conge_Etat etat; 
 	@ManyToOne
 	private User user;

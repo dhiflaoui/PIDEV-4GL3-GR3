@@ -8,8 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
+
 public class Affectation implements Serializable {
 
 	
@@ -19,7 +22,7 @@ public class Affectation implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
-	@Column(name="Id_Affectation")
+	@Column
 	private int Id ;
 	
 	@ManyToOne

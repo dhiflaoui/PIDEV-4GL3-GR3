@@ -37,7 +37,7 @@ user = userLoggedIn;
 			System.out.println("leeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+user.getNom());
 			loggedIn = true; 
 		}
-		else if (userLoggedIn != null && userLoggedIn.getRole() == Role.INGENIEUR) {
+		else if (userLoggedIn != null && userLoggedIn.getRole() == Role.INGENIEUR || userLoggedIn.getRole() == Role.MANAGER || userLoggedIn.getRole() == Role.ADMINISTRATEUR || userLoggedIn.getRole() == Role.TECHNICIEN  ) {
 user = userLoggedIn;
 			navigateTo = "/Mes_Absence?faces-redirect=true";
 			System.out.println("leeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+user.getNom());
@@ -45,6 +45,7 @@ user = userLoggedIn;
 			loggedIn = true; 
 			
 		}
+		
 		else 
 		{
 			FacesContext.getCurrentInstance().addMessage("form:btn", new FacesMessage("Bad Credentials"));

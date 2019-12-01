@@ -1,59 +1,106 @@
 package tn.esprit.Pidev_Entities;
 import java.io.Serializable;
+
 import java.util.Date;
 import java.util.*;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
+
 public class Evaluation implements Serializable {
 	
 	private static final long serialVersionUID = -1396669830860400871L;
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	@Column(name="Eval_ID")
+	@Column
 	int id;
-	@Column(name="Nom_Eval")
-	private String Nom_Eval;
-	@Column(name="desc_Eval")
+	@Column
+	private String Titre_Eval;
+	@Column
 	private String desc_Eval  ;
-	@Column(name="score_self_Eval")
-	private  Integer score_self ; 
-	@Column(name="score_team_Eval")
-	private Integer score_team ;
-	@Column(name="score_Manager_Eval")
-	private  Integer score_Manager ;
+	@Column
+	private  int score_self ; 
+	@Column
+	private int score_team ;
+	@Column
+	private  int score_Manager ;
 	@Enumerated(EnumType.STRING)
-	@Column(name="Type_Eval")
+	@Column
 	Type_Evaluation Type; 
-	@Column(name="DATE_EVAL")
+	@Column
 	@Temporal
 	(TemporalType.TIMESTAMP)
 	private Date DATE_EVAL ;
 	
+	public Evaluation(int id ,String Titre_Eval, String desc_Eval, Type_Evaluation Type,int score_Manager) {
+		super();
+		this.id = id;
+		this.desc_Eval = desc_Eval;
+		this.Titre_Eval = Titre_Eval;
+		this.Type = Type;
+		this.score_Manager = score_Manager;
+		
+		
+	}
+
+	public Evaluation(String Titre_Eval, String desc_Eval, Type_Evaluation Type,Date DATE_EVAL,int score_Manager) {
+		super();
+		this.score_Manager = score_Manager;
+		this.Titre_Eval = Titre_Eval;
+		this.desc_Eval = desc_Eval;
+		this.Type = Type;
+		this.DATE_EVAL = DATE_EVAL;
+		
+	}
 	
-	//relation user evaluation
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "T_Eval_User",
-	joinColumns={@JoinColumn(name="Eval_ID")},
-	inverseJoinColumns={@JoinColumn(name ="UT_ID")})
-	private Set<User> Users;
+	public Evaluation(int score_self) {
+		super();
+		this.score_self = score_self;
+		
+	}
 	
-	public Evaluation() {}
 	
+	public Evaluation() {
+		super();
+	}
+	
+	
+	
+	public Evaluation(String Titre_Eval, String desc_Eval, Type_Evaluation Type, Date DATE_EVAL) {
+		super();
+		this.Titre_Eval = Titre_Eval;
+		this.desc_Eval = desc_Eval;
+		this.Type = Type;
+		this.DATE_EVAL = DATE_EVAL;
+	}
+
+	
+
+
 	
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getNom_Eval() {
-		return Nom_Eval;
+
+	public String getTitre_Eval() {
+		return Titre_Eval;
 	}
-	public void setNom_Eval(String nom_Eval) {
-		Nom_Eval = nom_Eval;
+
+
+
+	public void setTitre_Eval(String titre_Eval) {
+		Titre_Eval = titre_Eval;
 	}
+
+
+
 	public String getDesc_Eval() {
 		return desc_Eval;
 	}
@@ -91,14 +138,6 @@ public class Evaluation implements Serializable {
 	}
 
 
-	public Set<User> getUsers() {
-		return Users;
-	}
-
-
-	public void setUsers(Set<User> users) {
-		Users = users;
-	}
 
 
 	public Type_Evaluation getType() {
@@ -117,15 +156,17 @@ public class Evaluation implements Serializable {
 		return serialVersionUID;
 	}
 
-	
+
+	@ManyToOne
+	private User user;
 
 
-
-
-
-
-
-
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 
 

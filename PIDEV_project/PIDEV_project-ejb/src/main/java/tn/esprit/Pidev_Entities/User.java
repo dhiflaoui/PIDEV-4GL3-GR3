@@ -2,7 +2,7 @@ package tn.esprit.Pidev_Entities;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,6 +21,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,45 +33,48 @@ import javax.persistence.Table;
 
 
 @Entity 
-@Table(name="T_UTILISATEUR") 
+@XmlRootElement
 public class User implements Serializable{ 
 	@Id 
 	@GeneratedValue( strategy= GenerationType.IDENTITY) 
-	@Column(name="UT_ID") 
+	@Column
 	int id; 
-	@Column(name="UT_CIN") 
+	@Column
 	String cin;
-	@Column(name="UT_NOM") 
+	@Column
 	String nom; 
-	@Column(name="UT_PRENOM") 
+	@Column
 	String prenom; 
-	@Column(name="UT_ADRESS_MAIL") 
+	@Column
 	String adresseMail; 
-	@Column(name="UT_MOTDP") 
+	@Column
 	String motdp;
-	@Column(name="UT_PHOTO") 
+	@Column
 	String photo;
-	@Column(name="UT_CV") 
+	@Column
 	String cv;
-	@Column(name="UT_VILLE") 
+	@Column
 	String ville;
-	@Column(name="UT_TEL") 
+	@Column
 	String tel;
-	@Column(name="UT_SOLDE_CONGE") 
+	@Column
 	int solde_conge;
-	@Column(name="UT_SOLDE_ABSENCE", nullable = true)
+	@Column( nullable = true)
 	int solde_absence;
-	@Column(name="UT_SALAIRE") 
+	@Column
 	Double salaire;
-	
-	@Enumerated(EnumType.STRING)
-	@Column(name="Role")
-	private Role role ;
 
-	@OneToMany(mappedBy = "user")
+	@Enumerated(EnumType.STRING)
+	@Column
+	private Role role ;
+	private Boolean ToBeEval; 
+
+	@OneToMany(mappedBy = "user")	
+	@JsonBackReference(value = "test")
 	private List<Formation> formation;
 	
 	@OneToMany(mappedBy = "users")
+	@JsonBackReference
 	private List<Affectation> affectation;
 	
 	public List<Formation> getFormation() {
@@ -77,46 +85,77 @@ public class User implements Serializable{
 	}
 
 	@Enumerated(EnumType.STRING)
-	@Column(name="Specialite")
+	@Column
 	private Specialite specialite;
 
 
 	// Relation entre employe et congé
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	@JsonBackReference
 	private List<Conge>  conge ;
 	
 	// Relation entre employe et congé
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	@JsonBackReference
 	private List<Absence>  absence ;
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	@JsonBackReference
+	private List<Publication>  publication ;
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	@JsonBackReference
+	private List<Feedback>  feedback ;
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	@JsonBackReference
+	private List<Reactp> reactp ;
+	
 	// Relation entre employe et evaluation
-	@ManyToMany(mappedBy="Users", cascade = CascadeType.ALL)
-	private Set<Evaluation> Evaluations;
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	@JsonBackReference
+	private List<Evaluation> evaluations;
 	// Relation entre employe et evaluation
 	@ManyToOne
-	@JoinColumn(name="idMission", referencedColumnName="id", insertable=false , updatable=false)
+	@JoinColumn(referencedColumnName="id", insertable=false , updatable=false)
 	private Mission mission;
 	// Relation entre manager et equipe
-	@OneToMany(mappedBy="managedBy")
-	private List<Equipe>  managerOf ;
-	// Relation entre employe et equipe
-	@OneToMany(mappedBy="membreOf")
-	private List<Equipe>  employeOf ;
-	// Relation entre manager et project
-	@OneToMany(mappedBy="ownedBy")
-	private List<Project>  ownerOF ;
-	// Relation entre employe et project
-	@ManyToOne
-	@JoinColumn(name="idProject", referencedColumnName="Project_ID", insertable=false , updatable=false, nullable = true)
-	private Project workOn;
+	//Yassine ********************************************
+	
+		// Relation entre manager et equipe
+		@OneToMany(mappedBy="managedBy" , cascade = CascadeType.PERSIST)
+		@JsonBackReference
+
+		private List<Equipe>  managerOf ;
+		
+		// Relation entre employe et equipe
+		@ManyToOne
+		@JoinColumn( referencedColumnName="id", insertable=false , updatable=false)
+		private Equipe  memberOf;
+		
+		// Relation entre manager et project
+		@OneToMany(mappedBy="ownedBy")
+		@JsonBackReference
+
+		private List<Project>  ownerOF ;
+		
+		// Relation entre employee et assignements
+		@OneToMany(mappedBy="emp", cascade = CascadeType.ALL)
+		@JsonBackReference
+		private List<Assignment>  assignments ;
+		
+		
+		
+		//Yassine **************************************
+		
 	public int getId() {
 		return id;
 	}
+	@XmlAttribute
 	public void setId(int id) {
 		this.id = id;
 	}
 	public String getCin() {
 		return cin;
 	}
+	
 	public void setCin(String cin) {
 		this.cin = cin;
 	}
@@ -129,6 +168,7 @@ public class User implements Serializable{
 	public String getPrenom() {
 		return prenom;
 	}
+	
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
@@ -198,12 +238,7 @@ public class User implements Serializable{
 	public void setAbsence(List<Absence> absence) {
 		this.absence = absence;
 	}
-	public Set<Evaluation> getEvaluations() {
-		return Evaluations;
-	}
-	public void setEvaluations(Set<Evaluation> evaluations) {
-		Evaluations = evaluations;
-	}
+
 	public Mission getMission() {
 		return mission;
 	}
@@ -213,59 +248,21 @@ public class User implements Serializable{
 	public List<Equipe> getManagerOf() {
 		return managerOf;
 	}
-	public void setManagerOf(List<Equipe> managerOf) {
-		this.managerOf = managerOf;
+	public Boolean getToBeEval() {
+		return ToBeEval;
 	}
-	public List<Equipe> getEmployeOf() {
-		return employeOf;
-	}
-	public void setEmployeOf(List<Equipe> employeOf) {
-		this.employeOf = employeOf;
-	}
-	public List<Project> getOwnerOF() {
-		return ownerOF;
-	}
-	public void setOwnerOF(List<Project> ownerOF) {
-		this.ownerOF = ownerOF;
-	}
-	public Project getWorkOn() {
-		return workOn;
-	}
-	public void setWorkOn(Project workOn) {
-		this.workOn = workOn;
-	}
-	public User(int id, String cin, String nom, String prenom, String adresseMail, String motdp, String photo,
-			String cv, String ville, String tel, int solde_conge,int solde_absence, Double salaire, Role role,Specialite specialite, List<Conge> conge,
-			List<Absence> absence, Set<Evaluation> evaluations, Mission mission, List<Equipe> managerOf,
-			List<Equipe> employeOf, List<Project> ownerOF, Project workOn) {
-		super();
-		this.id = id;
-		this.cin = cin;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.adresseMail = adresseMail;
-		this.motdp = motdp;
-		this.photo = photo;
-		this.cv = cv;
-		this.ville = ville;
-		this.tel = tel;
-		this.solde_conge = solde_conge;
-		this.solde_absence = solde_absence;
-
-		this.salaire = salaire;
-		this.role = role;
-		this.specialite = specialite;
-
-		this.conge = conge;
-		this.absence = absence;
-		Evaluations = evaluations;
-		this.mission = mission;
-		this.managerOf = managerOf;
-		this.employeOf = employeOf;
-		this.ownerOF = ownerOF;
-		this.workOn = workOn;
+	public void setToBeEval(Boolean toBeEval) {
+		ToBeEval = toBeEval;
 	}
 	
+	
+	
+	public List<Reactp> getReactp() {
+		return reactp;
+	}
+	public void setReactp(List<Reactp> reactp) {
+		this.reactp = reactp;
+	}
 	public User( String cin, String nom, String prenom, String adresseMail, String motdp, String photo,
 			String cv, String ville, String tel, int solde_conge, int solde_absence, Double salaire, Role role,Specialite specialite) {
 		super();
@@ -310,7 +307,13 @@ public class User implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+	public User( String cin) {
+		super();
+
+		this.cin = cin;
+
+
+	}
 
 	public User( int userIdToBeUpdated,String cin, String nom, String prenom, String adresseMail, String motdp, String photo,
 			String cv, String ville, String tel, int solde_conge,int solde_absence, Double salaire, Role role, Specialite specialite) {
@@ -332,6 +335,7 @@ public class User implements Serializable{
 		this.role = role;
 		this.specialite = specialite;
 	}
+	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", cin=" + cin + ", nom=" + nom + ", prenom=" + prenom + ", adresseMail="
@@ -350,6 +354,85 @@ public class User implements Serializable{
 	public void setSpecialite(Specialite specialite) {
 		this.specialite = specialite;
 	}
+	public List<Affectation> getAffectation() {
+		return affectation;
+	}
+	public void setAffectation(List<Affectation> affectation) {
+		this.affectation = affectation;
+	}
+	public Equipe getMemberOf() {
+		return memberOf;
+	}
+	public void setMemberOf(Equipe memberOf) {
+		this.memberOf = memberOf;
+	}
+	public List<Project> getOwnerOF() {
+		return ownerOF;
+	}
+	public void setOwnerOF(List<Project> ownerOF) {
+		this.ownerOF = ownerOF;
+	}
+	public List<Assignment> getAssignments() {
+		return assignments;
+	}
+	public void setAssignments(List<Assignment> assignments) {
+		this.assignments = assignments;
+	}
+	public void setManagerOf(List<Equipe> managerOf) {
+		this.managerOf = managerOf;
+	}
+	
+	public List<Evaluation> getEvaluations() {
+		return evaluations;
+	}
+	public void setEvaluations(List<Evaluation> evaluations) {
+		this.evaluations = evaluations;
+	}
+	public User(int id, String cin, String nom, String prenom, String adresseMail, String motdp, String photo,
+			String cv, String ville, String tel, int solde_conge, int solde_absence, Double salaire, Role role,
+			List<Formation> formation, List<Affectation> affectation, Specialite specialite, List<Conge> conge,
+			List<Absence> absence, List<Evaluation> evaluations, Mission mission, List<Equipe> managerOf,
+			Equipe memberOf, List<Project> ownerOF, List<Assignment> assignments) {
+		super();
+		this.id = id;
+		this.cin = cin;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresseMail = adresseMail;
+		this.motdp = motdp;
+		this.photo = photo;
+		this.cv = cv;
+		this.ville = ville;
+		this.tel = tel;
+		this.solde_conge = solde_conge;
+		this.solde_absence = solde_absence;
+		this.salaire = salaire;
+		this.role = role;
+		this.formation = formation;
+		this.affectation = affectation;
+		this.specialite = specialite;
+		this.conge = conge;
+		this.absence = absence;
+		this.evaluations = evaluations;
+		this.mission = mission;
+		this.managerOf = managerOf;
+		this.memberOf = memberOf;
+		this.ownerOF = ownerOF;
+		this.assignments = assignments;
+	}
+	public List<Publication> getPublication() {
+		return publication;
+	}
+	public void setPublication(List<Publication> publication) {
+		this.publication = publication;
+	}
+	public List<Feedback> getFeedback() {
+		return feedback;
+	}
+	public void setFeedback(List<Feedback> feedback) {
+		this.feedback = feedback;
+	}
+	
 	
 
 }

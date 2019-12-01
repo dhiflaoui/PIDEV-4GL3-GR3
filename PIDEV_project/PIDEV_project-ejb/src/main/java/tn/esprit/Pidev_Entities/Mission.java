@@ -15,11 +15,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import EntityBase.AbstractTimestampEntity;
 import EntityBase.IBaseEntity;
 
 @Entity
+@XmlRootElement
 public class Mission extends AbstractTimestampEntity implements Serializable, IBaseEntity {
 
 	private static final long serialVersionUID = 35501844688441792L;
@@ -123,7 +126,7 @@ public class Mission extends AbstractTimestampEntity implements Serializable, IB
 	public Long getId() {
 		return id;
 	}
-
+	@XmlAttribute
 	public void setId(Long id) {
 		this.id = id;
 	}

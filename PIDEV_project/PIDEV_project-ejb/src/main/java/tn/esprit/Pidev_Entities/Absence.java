@@ -15,9 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity 
-@Table(name="T_ABSENCE") 
+@XmlRootElement
 public class Absence implements Serializable{
 	/**
 	 * 
@@ -25,20 +26,20 @@ public class Absence implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id 
 	@GeneratedValue( strategy= GenerationType.IDENTITY) 
-	@Column(name="Absence_ID") 
+	@Column
 	int id; 
 	@Temporal(TemporalType.DATE)
-	@Column(name="ABS_Date_Debut")
+	@Column
 	private Date dateDebut ;
 	@Temporal(TemporalType.DATE)
-	@Column(name="ABS_Date_Fin")
+	@Column
 	private Date dateFin ;
-	@Column(name="ABS_File") 
+	@Column
 	String file;
-	@Column(name="ABS_Decision") 
+	@Column
 	String decision; 
 	@Enumerated(EnumType.STRING)
-	@Column(name="ABS_Etat")
+	@Column
 	private ABS_Etat etat;
 	@ManyToOne
 	private User user;

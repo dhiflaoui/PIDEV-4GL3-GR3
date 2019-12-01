@@ -10,13 +10,19 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 
 
 @Entity
+@XmlRootElement
 public class Formation implements Serializable{
 	
 	
@@ -28,26 +34,26 @@ public class Formation implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
-	@Column(name="Id_Formation")
+	@Column
 	private int Id ;
 	
-	@Column(name="Titre")
+	@Column
 	private String Titre ;
 	
-	@Column(name="Objectifs")
+	@Column
 	private String objectifs ;
 	
 
-	@Column(name="Date")
+	@Column
 	private String date ;
 	
-	@Column(name="Duree")
+	@Column
 	private Integer duree ;
 
-	@Column(name="Prix")
+	@Column
 	private Integer prix ;
 	
-	@Column(name="NbrP")
+	@Column
 	private Integer nbrP ;
 	
 	
@@ -56,9 +62,11 @@ public class Formation implements Serializable{
 	private Formateur formateur;
 	
 	@ManyToOne
+	@JoinColumn(nullable = true)
 	private User user ;
 	
 	@OneToMany(mappedBy = "formations")
+	@JsonBackReference
 	private List<Affectation> affectation;
 	
 
@@ -86,7 +94,7 @@ public class Formation implements Serializable{
 	public int getId() {
 		return Id;
 	}
-
+	@XmlAttribute
 	public void setId(int id) {
 		Id = id;
 	}
@@ -94,6 +102,7 @@ public class Formation implements Serializable{
 	public String getTitre() {
 		return Titre;
 	}
+	@XmlAttribute(name="titre")
 
 	public void setTitre(String titre) {
 		Titre = titre;
@@ -142,6 +151,7 @@ public class Formation implements Serializable{
 	public Specialite getSpecialtie() {
 		return specialtie;
 	}
+	@XmlAttribute(name="specialite")
 
 	public void setSpecialtie(Specialite specialtie) {
 		this.specialtie = specialtie;

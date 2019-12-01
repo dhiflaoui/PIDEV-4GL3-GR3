@@ -11,11 +11,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 
 
 @Entity
+@XmlRootElement
+
 public class Formateur implements Serializable {
 
 	
@@ -26,24 +32,24 @@ public class Formateur implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
-	@Column(name="Id_Formateur")
+	@Column
 	private int id ;
 	
 	
 
 	
 
-	@Column(name="Nom")
+	@Column
 	private String nom ;
 	
-	@Column(name="Pernom")
+	@Column
 	private String prenom ;
 	
 	 
-	@Column(name="Email" )
+	@Column
 	private String email ;
 	
-	@Column(name="Numero")
+	@Column
 	private String numero;
 	
 	@Enumerated(EnumType.STRING)
@@ -51,6 +57,8 @@ public class Formateur implements Serializable {
 	private Disponible dis;
 	
 	@OneToMany(mappedBy = "formateur")
+	@JsonBackReference
+
 	private List<Formation> formations;
 	
 	public List<Formation> getFormations() {
@@ -78,7 +86,7 @@ public class Formateur implements Serializable {
 	public int getId() {
 		return id;
 	}
-
+	@XmlAttribute
 	public void setId(int id) {
 		this.id = id;
 	}

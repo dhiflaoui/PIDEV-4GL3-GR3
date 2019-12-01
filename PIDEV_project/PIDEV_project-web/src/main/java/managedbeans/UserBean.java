@@ -7,6 +7,10 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
 import javax.servlet.http.Part;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -23,6 +27,7 @@ import java.io.FileInputStream;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.view.facelets.Metadata;
 import javax.servlet.http.HttpServletResponse;
 
 
@@ -74,6 +79,7 @@ public class UserBean implements Serializable {
 		return "succes-ajout-employe?faces-redirect=true";
 		}
 	private List<User> users;
+	
 	public List<User> getUsers(){
 		users = employeService.getAllUser(); 
 		return users;
